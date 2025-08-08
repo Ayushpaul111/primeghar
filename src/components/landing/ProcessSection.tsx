@@ -1,4 +1,5 @@
 import phone from "@/assets/process-phone.jpg";
+import Reveal from "@/components/motion/Reveal";
 
 const ProcessSection = () => {
   const steps = [
@@ -10,19 +11,19 @@ const ProcessSection = () => {
   return (
     <section id="process" className="py-12 md:py-20">
       <div className="container mx-auto">
-        <h2 className="text-center text-3xl font-bold">Check how our process is done</h2>
+        <h2 className="text-center text-3xl font-bold font-display">Check how our process is done</h2>
         <div className="mt-8 grid items-center gap-10 md:grid-cols-2">
           <div className="order-2 md:order-1 grid gap-6">
-            {steps.map((s) => (
-              <div key={s.title} className="rounded-xl border p-5">
+            {steps.map((s, i) => (
+              <Reveal key={s.title} delay={i * 80} className="rounded-xl border p-5">
                 <h3 className="text-lg font-semibold">{s.title}</h3>
                 <p className="text-sm text-muted-foreground">{s.text}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
-          <div className="order-1 md:order-2">
-            <img src={phone} alt="Handyman service app on a smartphone" loading="lazy" className="mx-auto max-h-[520px] rounded-[2rem] shadow-elevated" />
-          </div>
+          <Reveal delay={100} className="order-1 md:order-2">
+            <img src={phone} alt="Handyman service app on a smartphone" loading="lazy" className="mx-auto max-h:[520px] rounded-[2rem] shadow-elevated" />
+          </Reveal>
         </div>
       </div>
     </section>

@@ -3,6 +3,7 @@ import service2 from "@/assets/service-paint.jpg";
 import service3 from "@/assets/service-electric.jpg";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Reveal from "@/components/motion/Reveal";
 
 const ServicesGrid = () => {
   const items = [
@@ -32,21 +33,23 @@ const ServicesGrid = () => {
         <div className="mb-8 flex items-end justify-between">
           <div>
             <p className="text-sm text-muted-foreground">Popular</p>
-            <h2 id="services-title" className="text-3xl font-bold tracking-tight">Explore our wide range of services</h2>
+            <h2 id="services-title" className="text-3xl font-bold tracking-tight font-display">Explore our wide range of services</h2>
           </div>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
-          {items.map((item) => (
-            <Card key={item.title} className="overflow-hidden transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-elevated">
-              <img src={item.img} alt={item.alt} loading="lazy" className="h-48 w-full object-cover" />
-              <CardHeader>
-                <CardTitle>{item.title}</CardTitle>
-                <CardDescription>{item.description}</CardDescription>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <Button variant="soft">Learn more</Button>
-              </CardContent>
-            </Card>
+          {items.map((item, i) => (
+            <Reveal key={item.title} delay={i * 80}>
+              <Card className="overflow-hidden transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-elevated">
+                <img src={item.img} alt={item.alt} loading="lazy" className="h-48 w-full object-cover" />
+                <CardHeader>
+                  <CardTitle>{item.title}</CardTitle>
+                  <CardDescription>{item.description}</CardDescription>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <Button variant="soft">Learn more</Button>
+                </CardContent>
+              </Card>
+            </Reveal>
           ))}
         </div>
       </div>

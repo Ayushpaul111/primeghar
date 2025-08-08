@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <header className="w-full border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="container mx-auto flex h-16 items-center justify-between">
-        <a href="#" className="flex items-center gap-2 font-semibold">
+        <a href="#" className="flex items-center gap-2 font-semibold font-display">
           <span aria-hidden className="h-6 w-6 rounded-md bg-primary" />
           HomePro
         </a>

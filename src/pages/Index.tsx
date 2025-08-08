@@ -2,6 +2,7 @@ import Navbar from "@/components/landing/Navbar";
 import Hero from "@/components/landing/Hero";
 import ImpactStats from "@/components/landing/ImpactStats";
 import ServicesGrid from "@/components/landing/ServicesGrid";
+import ProTeamMosaic from "@/components/landing/ProTeamMosaic";
 import ExperienceSection from "@/components/landing/ExperienceSection";
 import CTAOverlay from "@/components/landing/CTAOverlay";
 import ProcessSection from "@/components/landing/ProcessSection";
@@ -54,6 +55,7 @@ const Index = () => {
         <Hero />
         <ImpactStats />
         <ServicesGrid />
+        <ProTeamMosaic />
         <ExperienceSection />
         <CTAOverlay />
         <ProcessSection />
