@@ -1,4 +1,4 @@
-import Navbar from "@/components/landing/Navbar";
+import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/landing/Hero";
 import ImpactStats from "@/components/landing/ImpactStats";
 import ServicesGrid from "@/components/landing/ServicesGrid";
@@ -8,7 +8,7 @@ import CTAOverlay from "@/components/landing/CTAOverlay";
 import ProcessSection from "@/components/landing/ProcessSection";
 import BlogSection from "@/components/landing/BlogSection";
 import TestimonialsSection from "@/components/landing/TestimonialsSection";
-import SiteFooter from "@/components/landing/SiteFooter";
+import SiteFooter from "@/components/layout/SiteFooter";
 import { Helmet } from "react-helmet-async";
 
 const Index = () => {

@@ -6,16 +6,16 @@ import QuoteDialogButton from "@/components/landing/QuoteDialogButton";
 
 const Navbar = () => {
   return (
-    <header className="w-full border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/70 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-elevated">
       <nav className="container mx-auto flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center gap-2 font-semibold font-display">
           <span aria-hidden className="h-6 w-6 rounded-md bg-primary" />
           HomePro
         </Link>
         <div className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
-          <Link to="/services" className="hover:text-foreground transition-colors">Services</Link>
-          <Link to="/process" className="hover:text-foreground transition-colors">Process</Link>
-          <Link to="/contact" className="hover:text-foreground transition-colors">Contact</Link>
+          <Link to="/services" className="story-link transition-colors">Services</Link>
+          <Link to="/process" className="story-link transition-colors">Process</Link>
+          <Link to="/contact" className="story-link transition-colors">Contact</Link>
         </div>
         <div className="flex items-center gap-2">
           <Button variant="soft" className="hidden md:inline-flex" asChild>
@@ -30,9 +30,9 @@ const Navbar = () => {
             </SheetTrigger>
             <SheetContent side="right" className="w-72">
               <nav className="mt-8 flex flex-col gap-4 text-sm">
-                <Link to="/services" className="hover:text-foreground transition-colors">Services</Link>
-                <Link to="/process" className="hover:text-foreground transition-colors">Process</Link>
-                <Link to="/contact" className="hover:text-foreground transition-colors">Contact</Link>
+                <Link to="/services" className="story-link transition-colors">Services</Link>
+                <Link to="/process" className="story-link transition-colors">Process</Link>
+                <Link to="/contact" className="story-link transition-colors">Contact</Link>
                 <Button variant="soft" asChild>
                   <Link to="/call-us">Call us</Link>
                 </Button>
