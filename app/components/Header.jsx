@@ -9,10 +9,12 @@ import {
 } from "framer-motion";
 import { cn } from "../lib/utils";
 import { getCalApi } from "@calcom/embed-react";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { scrollY } = useScroll();
+  const router = useRouter();
 
   // Transform scroll values for scaling effects
   const headerScale = useTransform(scrollY, [0, 200], [1, 0.85]);
@@ -31,14 +33,14 @@ const Header = () => {
   }, [scrollY]);
 
   const navItems = [
-    { id: "services", label: "SERVICES" },
-    { id: "doctor", label: "DOCTOR" },
-    { id: "testimonials", label: "TESTIMONIALS" },
+    { id: "about-us", label: "ABOUT US", path: "/about-us" },
+    { id: "stories", label: "STORIES", path: "/stories" },
+    { id: "services", label: "SERVICES", path: "/services" },
   ];
 
   useEffect(() => {
     (async function () {
-      const cal = await getCalApi({ namespace: "15min" });
+      const cal = await getCalApi({ namespace: "primeghar" });
       cal("ui", { hideEventTypeDetails: false, layout: "month_view" });
     })();
   }, []);
@@ -76,19 +78,13 @@ const Header = () => {
     };
   }, [isMenuOpen]);
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 100;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-    }
+  const navigateToPage = (path) => {
+    router.push(path);
     setIsMenuOpen(false);
+  };
+
+  const handleLogoClick = () => {
+    router.push("/");
   };
 
   const menuVariants = {
@@ -133,26 +129,27 @@ const Header = () => {
             paddingRight: headerPadding,
           }}
           className={cn(
-            "rounded-full py-1",
+            "rounded-full py-3",
             "flex items-center justify-between",
             isScrolled
               ? "bg-blue-800/70 backdrop-blur-md border-white/20"
               : "bg-blue-900",
             "shadow-lg",
-            "border",
+            "border border-transparent",
             "transition-all duration-300 ease-out"
           )}
         >
           <motion.div
-            className="flex items-center"
+            className="flex items-center cursor-pointer"
             style={{ scale: logoScale }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={handleLogoClick}
           >
             <img
               src="./logo.png"
-              alt="Primeghar logo"
-              className="h-16 transition-all duration-300 ease-out"
+              alt="PrimeGhar logo"
+              className="h-8 transition-all duration-300 ease-out"
             />
           </motion.div>
 
@@ -163,7 +160,7 @@ const Header = () => {
             {navItems.map((item) => (
               <motion.button
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
+                onClick={() => navigateToPage(item.path)}
                 className="text-sm font-medium text-white hover:font-bold transition-colors whitespace-nowrap"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -182,11 +179,11 @@ const Header = () => {
               style={{ scale: textSize }}
               whileHover={{ scale: 1.05, backgroundColor: "#1D4ED8" }}
               whileTap={{ scale: 0.95 }}
-              data-cal-namespace="15min"
-              data-cal-link="unicodentals/15min"
+              data-cal-namespace="primeghar"
+              data-cal-link="ayush-paul/primeghar"
               data-cal-config='{"layout":"month_view"}'
             >
-              Book Online
+              Book Now
             </motion.button>
 
             <motion.button
@@ -211,7 +208,7 @@ const Header = () => {
                 animate="open"
                 exit="closed"
                 variants={menuVariants}
-                className="absolute top-full left-4 right-4 mt-2 bg-white rounded-2xl shadow-lg md:hidden"
+                className="absolute top-full left-4 right-4 mt-2 bg-white rounded-2xl md:hidden"
                 data-menu-dropdown
               >
                 <nav className="flex flex-col p-4">
@@ -219,8 +216,8 @@ const Header = () => {
                     <motion.button
                       key={item.id}
                       variants={itemVariants}
-                      onClick={() => scrollToSection(item.id)}
-                      className="py-2 text-sm font-medium text-gray-700 hover:text-blue-600"
+                      onClick={() => navigateToPage(item.path)}
+                      className="py-2 text-sm font-medium text-gray-700 hover:text-blue-600 border-b border-gray-100 last:border-b-0"
                     >
                       {item.label}
                     </motion.button>
