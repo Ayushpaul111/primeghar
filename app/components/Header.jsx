@@ -214,16 +214,16 @@ const Header = () => {
                 animate="open"
                 exit="closed"
                 variants={menuVariants}
-                className="absolute top-full left-4 right-4 mt-2 bg-white rounded-2xl md:hidden shadow-xl"
+                className="absolute top-full left-4 right-4 mt-2 bg-white border border-gray-200 rounded-2xl md:hidden"
                 data-menu-dropdown
               >
-                <nav className="flex flex-col p-4">
+                <nav className="flex flex-col p-3">
                   {navItems.map((item) => (
                     <motion.button
                       key={item.id}
                       variants={itemVariants}
                       onClick={() => navigateToPage(item.path)}
-                      className="py-3 text-sm font-medium text-gray-700 hover:text-blue-600 border-b border-gray-100 last:border-b-0 text-left"
+                      className="py-3 text-sm font-medium text-gray-700 hover:text-blue-600 border-b border-gray-100 last:border-b-0 text-center"
                     >
                       {item.label}
                     </motion.button>

@@ -294,7 +294,7 @@ export default function HomePage() {
                     <span className="text-[#ef8e0f]">doorstep</span>
                     <img
                       className="absolute md:w-40 w-35 -bottom-18 md:-bottom-20 right-0"
-                      src="https://uapply.co.za/files/images/debtConsolidation/red-line-2.png"
+                      src="./red-line.png"
                       alt="Hero image"
                     />
                   </span>
