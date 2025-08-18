@@ -13,21 +13,25 @@ import { useRouter } from "next/navigation";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { scrollY } = useScroll();
   const router = useRouter();
 
-  // Transform scroll values for scaling effects
-  const headerScale = useTransform(scrollY, [0, 200], [1, 0.85]);
-  const headerPadding = useTransform(scrollY, [0, 200], [24, 16]);
-  const logoScale = useTransform(scrollY, [0, 200], [1, 0.8]);
-  const textSize = useTransform(scrollY, [0, 200], [1, 0.9]);
+  // Only apply transforms after component is mounted to prevent initial shift
+  const headerScale = useTransform(scrollY, [0, 200], [1, 0.95]);
+  const logoScale = useTransform(scrollY, [0, 200], [1, 0.9]);
+  const textSize = useTransform(scrollY, [0, 200], [1, 0.95]);
 
   // Determine background class based on scroll position
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
     const unsubscribe = scrollY.onChange((y) => {
-      setIsScrolled(y > 10); // Trigger background change after scrolling 10px
+      setIsScrolled(y > 10);
     });
     return () => unsubscribe();
   }, [scrollY]);
@@ -123,13 +127,15 @@ const Header = () => {
         <motion.header
           initial={{ y: -100 }}
           animate={{ y: 0 }}
-          style={{
-            scale: headerScale,
-            paddingLeft: headerPadding,
-            paddingRight: headerPadding,
-          }}
+          style={
+            mounted
+              ? {
+                  scale: headerScale,
+                }
+              : {}
+          }
           className={cn(
-            "rounded-full py-3",
+            "rounded-full px-6 py-3",
             "flex items-center justify-between",
             isScrolled
               ? "bg-blue-800/70 backdrop-blur-md border-white/20"
@@ -140,8 +146,8 @@ const Header = () => {
           )}
         >
           <motion.div
-            className="flex items-center cursor-pointer"
-            style={{ scale: logoScale }}
+            className="flex items-center cursor-pointer flex-shrink-0"
+            style={mounted ? { scale: logoScale } : {}}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleLogoClick}
@@ -154,8 +160,8 @@ const Header = () => {
           </motion.div>
 
           <motion.nav
-            className="hidden md:flex items-center space-x-8"
-            style={{ scale: textSize }}
+            className="hidden md:flex items-center space-x-8 flex-1 justify-center"
+            style={mounted ? { scale: textSize } : {}}
           >
             {navItems.map((item) => (
               <motion.button
@@ -170,13 +176,13 @@ const Header = () => {
             ))}
           </motion.nav>
 
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4 flex-shrink-0">
             <motion.button
               className={cn(
                 "text-sm font-medium px-6 py-2 rounded-full whitespace-nowrap transition-all duration-300 ease-out",
                 isScrolled ? "bg-blue-900 text-white" : "bg-blue-200 text-black"
               )}
-              style={{ scale: textSize }}
+              style={mounted ? { scale: textSize } : {}}
               whileHover={{ scale: 1.05, backgroundColor: "#1D4ED8" }}
               whileTap={{ scale: 0.95 }}
               data-cal-namespace="primeghar"
@@ -208,7 +214,7 @@ const Header = () => {
                 animate="open"
                 exit="closed"
                 variants={menuVariants}
-                className="absolute top-full left-4 right-4 mt-2 bg-white rounded-2xl md:hidden"
+                className="absolute top-full left-4 right-4 mt-2 bg-white rounded-2xl md:hidden shadow-xl"
                 data-menu-dropdown
               >
                 <nav className="flex flex-col p-4">
@@ -217,7 +223,7 @@ const Header = () => {
                       key={item.id}
                       variants={itemVariants}
                       onClick={() => navigateToPage(item.path)}
-                      className="py-2 text-sm font-medium text-gray-700 hover:text-blue-600 border-b border-gray-100 last:border-b-0"
+                      className="py-3 text-sm font-medium text-gray-700 hover:text-blue-600 border-b border-gray-100 last:border-b-0 text-left"
                     >
                       {item.label}
                     </motion.button>
