@@ -1,10 +1,271 @@
 "use client";
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Phone, Mail } from "lucide-react";
+import { Phone, Mail, Search } from "lucide-react";
 import { Card, CardContent } from "@/app/components/ui/card";
 import { Button } from "@/app/components/ui/button";
 import { getCalApi } from "@calcom/embed-react";
+import { servicesData } from "@/app/data/data.js";
+
+// Animation variants
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const staggerItem = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: "easeOut" },
+  },
+};
+
+// Component for Quick Service Grid
+const QuickServiceGrid = ({ services }) => (
+  <motion.div
+    className="grid grid-cols-4 gap-4 mb-8"
+    variants={staggerContainer}
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true, margin: "-50px" }}
+  >
+    {services.map((service, index) => (
+      <motion.a
+        key={index}
+        href={service.href}
+        className="bg-gray-100/50 border border-gray-300 p-3 rounded-lg text-center cursor-pointer hover:shadow-md transition-shadow block"
+        variants={staggerItem}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <div className="text-2xl mb-2">{service.icon}</div>
+        <div className="text-xs text-gray-700">{service.label}</div>
+      </motion.a>
+    ))}
+  </motion.div>
+);
+
+// Component for Hero Images
+const HeroImages = ({ images }) => (
+  <motion.div
+    className="grid grid-cols-2 gap-4"
+    initial="hidden"
+    animate="visible"
+    variants={staggerContainer}
+  >
+    <div className="space-y-4">
+      <motion.img
+        src={images[0].src}
+        alt={images[0].alt}
+        className={images[0].className}
+        variants={staggerItem}
+      />
+      <motion.img
+        src={images[1].src}
+        alt={images[1].alt}
+        className={images[1].className}
+        variants={staggerItem}
+      />
+    </div>
+    <div className="space-y-4 pt-8">
+      <motion.img
+        src={images[2].src}
+        alt={images[2].alt}
+        className={images[2].className}
+        variants={staggerItem}
+      />
+      <motion.img
+        src={images[3].src}
+        alt={images[3].alt}
+        className={images[3].className}
+        variants={staggerItem}
+      />
+    </div>
+  </motion.div>
+);
+
+// Component for Featured Services Cards
+const FeaturedServicesCards = ({ services }) => (
+  <motion.div
+    className="grid md:grid-cols-3 gap-6"
+    variants={staggerContainer}
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true, margin: "-50px" }}
+  >
+    {services.map((service, index) => (
+      <motion.div key={index} variants={staggerItem}>
+        <Card className={`${service.bgColor} border-0`}>
+          <CardContent className="p-6">
+            <h3 className="font-semibold text-gray-900 mb-2">
+              {service.title}
+            </h3>
+            <p className="text-sm text-gray-600 mb-4">{service.description}</p>
+            <Button
+              size="sm"
+              className={service.buttonColor}
+              variant={service.variant}
+            >
+              Book now
+            </Button>
+          </CardContent>
+        </Card>
+      </motion.div>
+    ))}
+  </motion.div>
+);
+
+// Component for Service Cards (reusable for new and popular services)
+const ServiceCards = ({ services, columns = "md:grid-cols-5" }) => (
+  <motion.div
+    className={`grid ${columns} gap-6`}
+    variants={staggerContainer}
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true, margin: "-50px" }}
+  >
+    {services.map((service, index) => (
+      <motion.div key={index} variants={staggerItem}>
+        <Card className="cursor-pointer hover:shadow-lg transition-shadow">
+          <CardContent className="p-0">
+            <a href={service.href}>
+              <img
+                src={service.image}
+                alt={service.title}
+                className="w-full h-32 object-cover rounded-t-lg"
+              />
+              <div className="p-4">
+                <h3 className="font-medium text-sm text-gray-900">
+                  {service.title}
+                </h3>
+                {service.description && (
+                  <p className="text-sm text-gray-600 mt-1">
+                    {service.description}
+                  </p>
+                )}
+              </div>
+            </a>
+          </CardContent>
+        </Card>
+      </motion.div>
+    ))}
+  </motion.div>
+);
+
+// Component for CTA Section
+const CtaSection = ({ data }) => (
+  <motion.div
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true, margin: "-50px" }}
+    variants={fadeInUp}
+  >
+    <Card className="border-0 overflow-hidden">
+      <CardContent className="p-0 relative">
+        <div className="relative h-96 md:h-[500px]">
+          {/* Background Image */}
+          <img
+            src={data.image.src}
+            alt={data.image.alt}
+            className="w-full h-full object-cover"
+          />
+
+          {/* Overlay for better text readability */}
+          <div className="absolute inset-0 bg-black/20"></div>
+
+          {/* Content Overlay */}
+          <div className="absolute inset-0 flex items-center">
+            <div className="container mx-auto px-8">
+              <div className="max-w-lg">
+                <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+                  {data.title}
+                </h2>
+                <p className="text-white/90 text-lg mb-8 drop-shadow-md">
+                  {data.subtitle}
+                </p>
+                <Button
+                  size="lg"
+                  className={`${data.buttonColor} px-8 py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300`}
+                >
+                  {data.buttonText}
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  </motion.div>
+);
+
+// Component for Final CTA
+const FinalCta = ({ data }) => (
+  <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+    <div className="max-w-4xl mx-auto px-4 text-center">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <h2 className="text-4xl font-bold mb-6">{data.title}</h2>
+        <p className="text-xl text-blue-100 mb-8">{data.subtitle}</p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          {data.buttons.map((button, index) => {
+            const IconComponent = button.icon === "phone" ? Phone : Mail;
+
+            if (button.type === "primary") {
+              return (
+                <motion.button
+                  key={index}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-blue-50 transition-colors flex items-center"
+                  data-cal-namespace={button.calData.namespace}
+                  data-cal-link={button.calData.link}
+                  data-cal-config={button.calData.config}
+                >
+                  <IconComponent className="mr-2 w-5 h-5" />
+                  {button.text}
+                </motion.button>
+              );
+            } else {
+              return (
+                <motion.a
+                  key={index}
+                  href={button.href}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-blue-600 transition-colors flex items-center"
+                >
+                  <IconComponent className="mr-2 w-5 h-5" />
+                  {button.text}
+                </motion.a>
+              );
+            }
+          })}
+        </div>
+      </motion.div>
+    </div>
+  </section>
+);
 
 export default function HomePage() {
   useEffect(() => {
@@ -21,9 +282,27 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div>
-              <h1 className="text-4xl font-bold text-gray-900 mb-4">
-                Home services at your doorstep
-              </h1>
+              <motion.div
+                className="mb-4"
+                initial="hidden"
+                animate="visible"
+                variants={fadeInUp}
+              >
+                <h1 className="text-4xl font-bold text-gray-900 ">
+                  Home services at your&nbsp;
+                  <span className="relative">
+                    <span className="text-[#ef8e0f]">doorstep</span>
+                    <img
+                      className="absolute md:w-40 w-35 -bottom-18 md:-bottom-20 right-0"
+                      src="https://uapply.co.za/files/images/debtConsolidation/red-line-2.png"
+                      alt="Hero image"
+                    />
+                  </span>
+                </h1>
+                <p className="text-lg text-gray-600 mt-2">
+                  Book home services with ease and convenience.
+                </p>
+              </motion.div>
 
               <div className="mb-8">
                 <div
@@ -37,322 +316,65 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-4 gap-4 mb-8">
-                {[
-                  {
-                    icon: "🔧",
-                    label: "Helper Services",
-                    href: "/services",
-                  },
-                  {
-                    icon: "🪵",
-                    label: "Wooden Repair",
-                    href: "/services",
-                  },
-                  {
-                    icon: "🚰",
-                    label: "Plumbing Repair",
-                    href: "/services",
-                  },
-                  {
-                    icon: "⚡",
-                    label: "Electrical Repair",
-                    color: "bg-yellow-50",
-                    href: "/services",
-                  },
-                  {
-                    icon: "📱",
-                    label: "Electronic Repair",
-                    href: "/services",
-                  },
-                  {
-                    icon: "🧹",
-                    label: "Maid Services",
-                    href: "/services",
-                  },
-                  {
-                    icon: "🧽",
-                    label: "Cleaning Services",
-                    href: "/services",
-                  },
-                  {
-                    icon: "👩‍⚕️",
-                    label: "Aya Mashi",
-                    href: "/servicesjpg",
-                  },
-                ].map((service, index) => (
-                  <a
-                    key={index}
-                    href={service.href}
-                    className={`bg-gray-100/50 border border-gray-300 p-3 rounded-lg text-center cursor-pointer hover:shadow-md transition-shadow block`}
-                  >
-                    <div className="text-2xl mb-2">{service.icon}</div>
-                    <div className="text-xs text-gray-700">{service.label}</div>
-                  </a>
-                ))}
-              </div>
+              <QuickServiceGrid services={servicesData.quickServices} />
             </div>
 
-            {/* Hero Images */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-4">
-                <img
-                  src="./maid.png"
-                  alt="Helper service"
-                  className="w-full h-48 object-cover rounded-lg"
-                />
-                <img
-                  src="./car-washing-services.png"
-                  alt="Cleaning service"
-                  className="w-full h-36 object-cover rounded-lg"
-                />
-              </div>
-              <div className="space-y-4 pt-8">
-                <img
-                  src="./cleaning-services.png"
-                  alt="Maid service"
-                  className="w-full h-36 object-cover rounded-lg"
-                />
-                <img
-                  src="./Professional-Electrician.png"
-                  alt="Repair service"
-                  className="w-full h-48 object-cover rounded-lg"
-                />
-              </div>
-            </div>
+            <HeroImages images={servicesData.heroImages} />
           </div>
         </div>
       </section>
 
+      {/* Featured Services Section */}
       <section className="px-4 py-8 bg-gray-50">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-6">
-            <Card className="bg-pink-100 border-0">
-              <CardContent className="p-6">
-                <h3 className="font-semibold text-gray-900 mb-2">
-                  Professional Cleaning Services
-                </h3>
-                <p className="text-sm text-gray-600 mb-4">
-                  Deep cleaning & sanitization
-                </p>
-                <Button size="sm" className="bg-pink-600 hover:bg-pink-700">
-                  Book now
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-green-100 border-0">
-              <CardContent className="p-6">
-                <h3 className="font-semibold text-gray-900 mb-2">
-                  Expert Repair Services
-                </h3>
-                <p className="text-sm text-gray-600 mb-4">
-                  Electrical, plumbing & wooden repairs
-                </p>
-                <Button size="sm" className="bg-green-600 hover:bg-green-700">
-                  Book now
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gray-900 text-white border-0">
-              <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Trusted Helper Services</h3>
-                <p className="text-sm text-gray-300 mb-4">
-                  Reliable & professional
-                </p>
-                <Button size="sm" variant="secondary">
-                  Book now
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
+          <FeaturedServicesCards services={servicesData.featuredServices} />
         </div>
       </section>
 
+      {/* New and Noteworthy Section */}
       <section className="px-4 py-12">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-2xl font-bold text-gray-900 mb-8">
+          <motion.h2
+            className="text-2xl font-bold text-gray-900 mb-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={fadeInUp}
+          >
             New and noteworthy
-          </h2>
-          <div className="grid md:grid-cols-5 gap-6">
-            {[
-              {
-                title: "Electronic Repair",
-                image: "./Professional-Electrician.png",
-                href: "/Professional-Electrician.png",
-              },
-              {
-                title: "Car Wash Services",
-                image: "/car-washing-services.png",
-                href: "/wooden-repair",
-              },
-              {
-                title: "Aya Mashi Services",
-                image: "./ayamashi.png",
-                href: "/aya-mashi",
-              },
-              {
-                title: "Helper Services",
-                image: "./helper-services.png",
-                href: "/helper-services",
-              },
-              {
-                title: "Maid Services",
-                image: "./maid.png",
-                href: "/maid-services",
-              },
-            ].map((service, index) => (
-              <Card
-                key={index}
-                className="cursor-pointer hover:shadow-lg transition-shadow"
-              >
-                <CardContent className="p-0">
-                  <a href={service.href}>
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-32 object-cover rounded-t-lg"
-                    />
-                    <div className="p-4">
-                      <h3 className="font-medium text-sm text-gray-900">
-                        {service.title}
-                      </h3>
-                    </div>
-                  </a>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          </motion.h2>
+          <ServiceCards services={servicesData.newServices} />
         </div>
       </section>
 
+      {/* Most Booked Services Section */}
       <section className="px-4 py-12 bg-gray-50">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-2xl font-bold text-gray-900 mb-8">
+          <motion.h2
+            className="text-2xl font-bold text-gray-900 mb-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={fadeInUp}
+          >
             Most booked services
-          </h2>
-          <div className="grid md:grid-cols-4 gap-6">
-            {[
-              {
-                title: "Plumbing Repair",
-                description: "Professional plumbing solutions",
-                image: "./plumber.png",
-                href: "/plumbing-repair",
-              },
-              {
-                title: "Cleaning Services",
-                description: "Complete home cleaning",
-                image: "./cleaning-services.png",
-                href: "/cleaning-services",
-              },
-              {
-                title: "Electrical Repair",
-                description: "Safe electrical installations",
-                image: "./Professional-Electrician.png",
-                href: "/electrical-repair",
-              },
-              {
-                title: "Helper Services",
-                description: "General assistance services",
-                image: "./helper-services.png",
-                href: "/helper-services",
-              },
-            ].map((service, index) => (
-              <Card
-                key={index}
-                className="cursor-pointer hover:shadow-lg transition-shadow"
-              >
-                <CardContent className="p-0">
-                  <a href={service.href}>
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-40 object-cover rounded-t-lg"
-                    />
-                    <div className="p-4">
-                      <h3 className="font-medium text-gray-900 mb-1">
-                        {service.title}
-                      </h3>
-                      <p className="text-sm text-gray-600">
-                        {service.description}
-                      </p>
-                    </div>
-                  </a>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          </motion.h2>
+          <ServiceCards
+            services={servicesData.popularServices}
+            columns="md:grid-cols-4"
+          />
         </div>
       </section>
 
       {/* Cleaning Services CTA */}
       <section className="px-4 py-12">
         <div className="max-w-7xl mx-auto">
-          <Card className="bg-blue-100 border-0 overflow-hidden">
-            <CardContent className="p-0">
-              <div className="grid md:grid-cols-2 items-center">
-                <div className="p-8">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                    Professional Cleaning Services
-                  </h2>
-                  <Button className="bg-blue-600 hover:bg-blue-700">
-                    Book now
-                  </Button>
-                </div>
-                <div className="h-64 md:h-full">
-                  <img
-                    src="/professional-bathroom-cleaning.png"
-                    alt="Professional cleaning"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <CtaSection data={servicesData.ctaSection} />
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-4xl font-bold mb-6">
-              Ready to Book Your Home Service?
-            </h2>
-            <p className="text-xl text-blue-100 mb-8">
-              Get started today with our professional home services and let our
-              experts take care of your household needs
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-blue-50 transition-colors flex items-center"
-                data-cal-namespace="primeghar"
-                data-cal-link="ayush-paul/primeghar"
-                data-cal-config='{"layout":"month_view"}'
-              >
-                <Phone className="mr-2 w-5 h-5" />
-                Book Consultation
-              </motion.button>
-              <motion.a
-                href="mailto:contact@primeghar.com"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-blue-600 transition-colors flex items-center"
-              >
-                <Mail className="mr-2 w-5 h-5" />
-                Email Us
-              </motion.a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      {/* Final CTA Section */}
+      <FinalCta data={servicesData.finalCta} />
     </div>
   );
 }
