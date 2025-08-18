@@ -1,19 +1,119 @@
-import React from 'react';
+import Image from "next/image";
+import Link from "next/link";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Facebook,
+  Twitter,
+  Instagram,
+} from "lucide-react";
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
   return (
-    <footer style={{ padding: '2rem', backgroundColor: '#333', color: 'white', marginTop: 'auto' }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
-        <div style={{ marginBottom: '1rem' }}>
-          <h3 style={{ margin: '0 0 0.5rem 0' }}>PrimeGhar</h3>
-          <p style={{ margin: 0, opacity: 0.8 }}>Your trusted real estate partner</p>
+    <footer className="bg-white text-gray-600 py-8">
+      <div className="container mx-auto px-6">
+        <div className="flex flex-col md:flex-row justify-between items-center border-t border-gray-200 pt-6">
+          {/* Logo and Tagline */}
+          <div className="mb-6 md:mb-0 flex flex-col items-start">
+            <Image
+              src="/blue-orange-nobg.png"
+              alt="Azimute Logo"
+              width={80}
+              height={80}
+              className="mr-2"
+            />
+            <div>
+              <h3 className="text-lg font-semibold text-blue-950">PrimeGhar</h3>
+              <p className="text-sm">Because Every Home Deserves Prime Care</p>
+            </div>
+          </div>
+
+          {/* Navigation */}
+          <div className="mb-6 md:mb-0 hidden md:block">
+            <h4 className="text-sm font-semibold text-blue-950 mb-2">
+              Navigation
+            </h4>
+            <ul className="space-y-1 flex flex-col">
+              <li>
+                <Link href="/" className="hover:text-gray-900">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link href="/about-us" className="hover:text-gray-900">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link href="/services" className="hover:text-gray-900">
+                  Our Services
+                </Link>
+              </li>
+              <li>
+                <Link href="/stories" className="hover:text-gray-900">
+                  Stories
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div className="mb-6 md:mb-0">
+            <h4 className="text-sm font-semibold text-blue-950 mb-2">
+              Contact
+            </h4>
+            <ul className="space-y-1">
+              <li className="flex items-center">
+                <Mail className="w-4 h-4 mr-2" />
+                <Link
+                  href="mailto:primegharofficial@gmail.com"
+                  className="hover:text-gray-900"
+                >
+                  primegharofficial@gmail.com
+                </Link>
+              </li>
+              <li className="flex items-center">
+                <Phone className="w-4 h-4 mr-2" />
+                <Link href="tel:+919064995568" className="hover:text-gray-900">
+                  +91 9064995568
+                </Link>
+              </li>
+              <li className="flex items-center">
+                <MapPin className="w-4 h-4 mr-2" />
+                <span>Cooch Behar, West Bengal</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Language and Social Media */}
+          <div className="flex flex-col items-end">
+            <div className="flex space-x-4">
+              <Link href="#" className="hover:text-gray-900">
+                <Facebook className="w-5 h-5" />
+              </Link>
+              <Link href="#" className="hover:text-gray-900">
+                <Twitter className="w-5 h-5" />
+              </Link>
+              <Link href="#" className="hover:text-gray-900">
+                <Instagram className="w-5 h-5" />
+              </Link>
+            </div>
+          </div>
         </div>
-        <div style={{ borderTop: '1px solid #555', paddingTop: '1rem' }}>
-          <p style={{ margin: 0, fontSize: '0.9rem', opacity: 0.7 }}>
-            © {currentYear} PrimeGhar. All rights reserved.
-          </p>
+        <div className="mt-6 text-center text-xs text-gray-400">
+          © 2025 Primeghar. All rights reserved. |{" "}
+          <Link href="#" className="hover:text-gray-900">
+            Terms & Conditions
+          </Link>{" "}
+          |{" "}
+          <Link href="#" className="hover:text-gray-900">
+            Privacy Policy
+          </Link>{" "}
+          |{" "}
+          <Link href="#" className="hover:text-gray-900">
+            Cookies
+          </Link>
         </div>
       </div>
     </footer>

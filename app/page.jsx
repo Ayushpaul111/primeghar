@@ -40,7 +40,7 @@ const staggerItem = {
 // Component for Quick Service Grid
 const QuickServiceGrid = ({ services }) => (
   <motion.div
-    className="grid grid-cols-4 gap-4 mb-8"
+    className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 mb-10"
     variants={staggerContainer}
     initial="hidden"
     whileInView="visible"
@@ -50,13 +50,33 @@ const QuickServiceGrid = ({ services }) => (
       <motion.a
         key={index}
         href={service.href}
-        className="bg-gray-100/50 border border-gray-300 p-3 rounded-lg text-center cursor-pointer hover:shadow-md transition-shadow block"
+        className="group relative p-3 rounded-2xl bg-white/70 border border-gray-200 
+                   shadow-sm backdrop-blur-sm text-center cursor-pointer 
+                   hover:shadow-xl hover:border-blue-300 transition-all duration-300"
         variants={staggerItem}
-        whileHover={{ scale: 1.05 }}
+        whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
       >
-        <div className="text-2xl mb-2">{service.icon}</div>
-        <div className="text-xs text-gray-700">{service.label}</div>
+        {/* Icon Badge */}
+        <div
+          className="mx-auto mb-3 flex h-12 w-12 items-center justify-center 
+                        rounded-full bg-gradient-to-br from-blue-100 to-blue-200 
+                        text-blue-600 group-hover:from-blue-200 group-hover:to-blue-300 
+                        transition-colors duration-300"
+        >
+          <span className="text-xl">{service.icon}</span>
+        </div>
+
+        {/* Label */}
+        <div className="text-sm font-medium text-gray-800 group-hover:text-blue-700 transition-colors">
+          {service.label}
+        </div>
+
+        {/* Subtle Glow Effect */}
+        <div
+          className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-100/20 to-purple-100/20 
+                        opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+        />
       </motion.a>
     ))}
   </motion.div>
@@ -300,7 +320,7 @@ export default function HomePage() {
                   </span>
                 </h1>
                 <p className="text-lg text-gray-600 mt-2">
-                  Book home services with ease and convenience.
+                  Book home services with ease and convenience in Cooch Behar.
                 </p>
               </motion.div>
 
