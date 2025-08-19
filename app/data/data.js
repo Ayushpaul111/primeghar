@@ -72,27 +72,27 @@ export const servicesData = {
     {
       title: "Electronic Repair",
       image: "./Professional-Electrician.webp",
-      href: "/Professional-Electrician.webp", // Original href preserved
+      href: "/services", // Original href preserved
     },
     {
       title: "Car Wash Services",
       image: "/car-washing-services.webp", // Fixed path (was missing leading slash in original)
-      href: "/wooden-repair", // Original href preserved
+      href: "/services", // Original href preserved
     },
     {
       title: "Aya Mashi Services",
       image: "./ayamashi.webp",
-      href: "/aya-mashi",
+      href: "/services",
     },
     {
       title: "Helper Services",
       image: "./helper-services.webp",
-      href: "/helper-services",
+      href: "/services",
     },
     {
       title: "Maid Services",
       image: "./maid.webp",
-      href: "/maid-services",
+      href: "/services",
     },
   ],
 
@@ -102,25 +102,25 @@ export const servicesData = {
       title: "Plumbing Repair",
       description: "Professional plumbing solutions",
       image: "./plumber.webp",
-      href: "/plumbing-repair",
+      href: "/services",
     },
     {
       title: "Cleaning Services",
       description: "Complete home cleaning",
       image: "./cleaning-services.webp",
-      href: "/cleaning-services",
+      href: "/services",
     },
     {
       title: "Electrical Repair",
       description: "Safe electrical installations",
       image: "./Professional-Electrician.webp",
-      href: "/electrical-repair",
+      href: "/services",
     },
     {
       title: "Helper Services",
       description: "General assistance services",
       image: "./helper-services.webp",
-      href: "/helper-services",
+      href: "/services",
     },
   ],
 
