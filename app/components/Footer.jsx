@@ -40,21 +40,21 @@ const Footer = () => {
                   Home
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/about-us" className="hover:text-gray-900">
                   About Us
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link href="/services" className="hover:text-gray-900">
                   Our Services
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/stories" className="hover:text-gray-900">
                   Stories
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -76,7 +76,7 @@ const Footer = () => {
               <li className="flex items-center">
                 <Phone className="w-4 h-4 mr-2" />
                 <Link href="tel:+919064995568" className="hover:text-gray-900">
-                  +91 9064995568
+                  +91 90649 95568
                 </Link>
               </li>
               <li className="flex items-center">
@@ -89,13 +89,20 @@ const Footer = () => {
           {/* Language and Social Media */}
           <div className="flex flex-col items-end">
             <div className="flex space-x-4">
-              <Link href="#" className="hover:text-gray-900">
+              <Link
+                href="https://www.facebook.com/primeghar"
+                target="_blank "
+                rel="noopener noreferrer"
+                className="hover:text-gray-900"
+              >
                 <Facebook className="w-5 h-5" />
               </Link>
-              <Link href="#" className="hover:text-gray-900">
-                <Twitter className="w-5 h-5" />
-              </Link>
-              <Link href="#" className="hover:text-gray-900">
+              <Link
+                href="https://instagram.com/primeghar"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-gray-900"
+              >
                 <Instagram className="w-5 h-5" />
               </Link>
             </div>
@@ -103,7 +110,7 @@ const Footer = () => {
         </div>
         <div className="mt-6 text-center text-xs text-gray-400">
           © 2025 Primeghar. All rights reserved. |{" "}
-          <Link href="#" className="hover:text-gray-900">
+          {/* <Link href="#" className="hover:text-gray-900">
             Terms & Conditions
           </Link>{" "}
           |{" "}
@@ -113,7 +120,7 @@ const Footer = () => {
           |{" "}
           <Link href="#" className="hover:text-gray-900">
             Cookies
-          </Link>
+          </Link> */}
         </div>
       </div>
     </footer>

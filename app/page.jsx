@@ -296,9 +296,9 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white pt-28">
       {/* Hero Section */}
-      <section className="px-4 pt-28 py-8">
+      <section className="px-4  py-8">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div>

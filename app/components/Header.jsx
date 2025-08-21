@@ -9,13 +9,14 @@ import {
 } from "framer-motion";
 import { cn } from "../lib/utils";
 import { getCalApi } from "@calcom/embed-react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { scrollY } = useScroll();
   const router = useRouter();
+  const pathname = usePathname();
 
   // Only apply transforms after component is mounted to prevent initial shift
   const headerScale = useTransform(scrollY, [0, 200], [1, 0.95]);
@@ -37,8 +38,9 @@ const Header = () => {
   }, [scrollY]);
 
   const navItems = [
-    { id: "about-us", label: "ABOUT US", path: "/about-us" },
-    { id: "stories", label: "STORIES", path: "/stories" },
+    { id: "home", label: "HOME", path: "/" },
+    // { id: "about-us", label: "ABOUT US", path: "/about-us" },
+    // { id: "stories", label: "STORIES", path: "/stories" },
     { id: "services", label: "SERVICES", path: "/services" },
   ];
 
@@ -160,20 +162,34 @@ const Header = () => {
           </motion.div>
 
           <motion.nav
-            className="hidden md:flex items-center space-x-8 flex-1 justify-center"
+            className="hidden md:flex items-center space-x-8 flex-1 justify-center relative"
             style={mounted ? { scale: textSize } : {}}
           >
-            {navItems.map((item) => (
-              <motion.button
-                key={item.id}
-                onClick={() => navigateToPage(item.path)}
-                className="text-sm font-medium text-white hover:font-bold transition-colors whitespace-nowrap"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {item.label}
-              </motion.button>
-            ))}
+            {navItems.map((item) => {
+              const isActive = pathname === item.path;
+              return (
+                <motion.button
+                  key={item.id}
+                  onClick={() => navigateToPage(item.path)}
+                  className={cn(
+                    "text-sm font-medium text-white transition-colors whitespace-nowrap relative py-2",
+                    isActive ? "font-bold" : "hover:font-bold"
+                  )}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {item.label}
+                  {isActive && (
+                    <motion.div
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-white"
+                      layoutId="activeUnderline"
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: 1 }}
+                    />
+                  )}
+                </motion.button>
+              );
+            })}
           </motion.nav>
 
           <div className="flex items-center space-x-4 flex-shrink-0">
@@ -218,16 +234,32 @@ const Header = () => {
                 data-menu-dropdown
               >
                 <nav className="flex flex-col p-3">
-                  {navItems.map((item) => (
-                    <motion.button
-                      key={item.id}
-                      variants={itemVariants}
-                      onClick={() => navigateToPage(item.path)}
-                      className="py-3 text-sm font-medium text-gray-700 hover:text-blue-600 border-b border-gray-100 last:border-b-0 text-center"
-                    >
-                      {item.label}
-                    </motion.button>
-                  ))}
+                  {navItems.map((item) => {
+                    const isActive = pathname === item.path;
+                    return (
+                      <motion.button
+                        key={item.id}
+                        variants={itemVariants}
+                        onClick={() => navigateToPage(item.path)}
+                        className={cn(
+                          "py-3 text-sm font-medium border-b border-gray-100 last:border-b-0 text-center relative",
+                          isActive
+                            ? "text-blue-600 font-bold"
+                            : "text-gray-700 hover:text-blue-600"
+                        )}
+                      >
+                        {item.label}
+                        {isActive && (
+                          <motion.div
+                            className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600"
+                            layoutId="mobileActiveUnderline"
+                            initial={{ scaleX: 0 }}
+                            animate={{ scaleX: 1 }}
+                          />
+                        )}
+                      </motion.button>
+                    );
+                  })}
                 </nav>
               </motion.div>
             )}
