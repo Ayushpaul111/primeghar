@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Phone, Mail, Search } from "lucide-react";
+import { Phone, Mail, Search, ArrowUpRight } from "lucide-react";
 import { Card, CardContent } from "@/app/components/ui/card";
 import { Button } from "@/app/components/ui/button";
 import { getCalApi } from "@calcom/embed-react";
@@ -122,68 +122,78 @@ const HeroImages = ({ images }) => (
 );
 
 // Component for Featured Services Cards
-const FeaturedServicesCards = ({ services }) => (
-  <motion.div
-    className="grid md:grid-cols-3 gap-6"
-    variants={staggerContainer}
-    initial="hidden"
-    whileInView="visible"
-    viewport={{ once: true, margin: "-50px" }}
-  >
-    {services.map((service, index) => (
-      <motion.div key={index} variants={staggerItem}>
-        <Card className={`${service.bgColor} border-0`}>
-          <CardContent className="p-6">
-            <h3 className="font-semibold text-gray-900 mb-2">
-              {service.title}
-            </h3>
-            <p className="text-sm text-gray-600 mb-4">{service.description}</p>
-            <Button
-              size="sm"
-              className={service.buttonColor}
-              variant={service.variant}
-            >
-              Book now
-            </Button>
-          </CardContent>
-        </Card>
-      </motion.div>
-    ))}
-  </motion.div>
-);
+// const FeaturedServicesCards = ({ services }) => (
+//   <motion.div
+//     className="grid md:grid-cols-3 gap-10"
+//     variants={staggerContainer}
+//     initial="hidden"
+//     whileInView="visible"
+//     viewport={{ once: true, margin: "-50px" }}
+//   >
+//     {services.map((service, index) => (
+//       <motion.div
+//         key={index}
+//         variants={staggerItem}
+//         className="group flex flex-col justify-between border-b border-gray-200 pb-6 hover:translate-y-[-4px] transition-transform duration-300"
+//       >
+//         {/* Title */}
+//         <h3 className="text-xl font-bold tracking-tight text-gray-900 group-hover:text-gray-700 transition-colors">
+//           {service.title}
+//         </h3>
 
-// Component for Service Cards (reusable for new and popular services)
-const ServiceCards = ({ services, columns = "md:grid-cols-5" }) => (
+//         {/* Description */}
+//         <p className="mt-3 text-base leading-relaxed text-gray-600">
+//           {service.description}
+//         </p>
+
+//         {/* CTA */}
+//         <div className="mt-6">
+//           <button
+//             className={`px-4 py-2 text-sm font-medium rounded-full shadow-sm transition-all duration-300 ${service.buttonColor}`}
+//           >
+//             Book now →
+//           </button>
+//         </div>
+//       </motion.div>
+//     ))}
+//   </motion.div>
+// );
+
+const ServiceCards = ({ services }) => (
   <motion.div
-    className={`grid ${columns} gap-6`}
-    variants={staggerContainer}
+    className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6"
     initial="hidden"
     whileInView="visible"
+    variants={fadeInUp}
     viewport={{ once: true, margin: "-50px" }}
   >
     {services.map((service, index) => (
-      <motion.div key={index} variants={staggerItem}>
-        <Card className="cursor-pointer hover:shadow-lg transition-shadow">
-          <CardContent className="p-0">
-            <a href={service.href}>
+      <motion.div key={index}>
+        <a href={service.href} className="cursor-pointer block h-full">
+          <div className="rounded-2xl bg-white shadow-md p-3 h-full flex flex-col">
+            {/* Title */}
+            <div className="mb-2">
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900">
+                {service.title}
+              </h3>
+              {service.description && (
+                <p className="text-sm text-gray-500">{service.description}</p>
+              )}
+            </div>
+
+            {/* Image */}
+            <div className="relative rounded-xl overflow-hidden aspect-square">
               <img
                 src={service.image}
                 alt={service.title}
-                className="w-full h-32 object-cover rounded-t-lg"
+                className="w-full h-full object-cover"
               />
-              <div className="p-4">
-                <h3 className="font-medium text-sm text-gray-900">
-                  {service.title}
-                </h3>
-                {service.description && (
-                  <p className="text-sm text-gray-600 mt-1">
-                    {service.description}
-                  </p>
-                )}
-              </div>
-            </a>
-          </CardContent>
-        </Card>
+              <button className="absolute bottom-2 right-2 w-8 h-8 flex items-center justify-center rounded-full bg-white shadow-md border border-gray-200 hover:bg-gray-50">
+                <ArrowUpRight className="w-5 h-5 text-gray-800" />
+              </button>
+            </div>
+          </div>
+        </a>
       </motion.div>
     ))}
   </motion.div>
@@ -220,12 +230,14 @@ const CtaSection = ({ data }) => (
                 <p className="text-white/90 text-lg mb-8 drop-shadow-md">
                   {data.subtitle}
                 </p>
-                <Button
-                  size="lg"
-                  className={`${data.buttonColor} px-8 py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300`}
-                >
-                  {data.buttonText}
-                </Button>
+                <a href="/services">
+                  <Button
+                    size="lg"
+                    className={`${data.buttonColor} px-8 py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300`}
+                  >
+                    {data.buttonText}
+                  </Button>
+                </a>
               </div>
             </div>
           </div>
@@ -296,7 +308,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white pt-28">
+    <div className="min-h-screen bg-[#f4f4f4] pt-28">
       {/* Hero Section */}
       <section className="px-4  py-8">
         <div className="max-w-7xl mx-auto">
@@ -345,33 +357,33 @@ export default function HomePage() {
       </section>
 
       {/* Featured Services Section */}
-      <section className="px-4 py-8 bg-gray-50">
+      {/* <section className="px-4 py-8 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <FeaturedServicesCards services={servicesData.featuredServices} />
         </div>
-      </section>
+      </section> */}
 
       {/* New and Noteworthy Section */}
       <section className="px-4 py-12">
         <div className="max-w-7xl mx-auto">
           <motion.h2
-            className="text-2xl font-bold text-gray-900 mb-8"
+            className="text-3xl font-bold text-gray-900 mb-8"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
             variants={fadeInUp}
           >
-            New and noteworthy
+            Everyday services
           </motion.h2>
           <ServiceCards services={servicesData.newServices} />
         </div>
       </section>
 
       {/* Most Booked Services Section */}
-      <section className="px-4 py-12 bg-gray-50">
+      <section className="px-4 py-12 ">
         <div className="max-w-7xl mx-auto">
           <motion.h2
-            className="text-2xl font-bold text-gray-900 mb-8"
+            className="text-3xl font-bold text-gray-900 mb-8"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}

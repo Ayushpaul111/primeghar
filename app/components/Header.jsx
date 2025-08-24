@@ -140,8 +140,8 @@ const Header = () => {
             "rounded-full px-6 py-3",
             "flex items-center justify-between",
             isScrolled
-              ? "bg-blue-800/70 backdrop-blur-md border-white/20"
-              : "bg-blue-900",
+              ? "bg-blue-900/80 backdrop-blur-md border-white/20"
+              : "bg-[#022b60]",
             "shadow-lg",
             "border border-transparent",
             "transition-all duration-300 ease-out"
@@ -244,14 +244,14 @@ const Header = () => {
                         className={cn(
                           "py-3 text-sm font-medium border-b border-gray-100 last:border-b-0 text-center relative",
                           isActive
-                            ? "text-blue-600 font-bold"
-                            : "text-gray-700 hover:text-blue-600"
+                            ? "text-[#001639] font-bold"
+                            : "text-gray-700 hover:text-[#001639]"
                         )}
                       >
                         {item.label}
                         {isActive && (
                           <motion.div
-                            className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600"
+                            className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#001639]"
                             layoutId="mobileActiveUnderline"
                             initial={{ scaleX: 0 }}
                             animate={{ scaleX: 1 }}

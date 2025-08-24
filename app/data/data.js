@@ -85,11 +85,6 @@ export const servicesData = {
       href: "/services",
     },
     {
-      title: "Helper Services",
-      image: "./helper-services.webp",
-      href: "/services",
-    },
-    {
       title: "Maid Services",
       image: "./maid.webp",
       href: "/services",
@@ -181,7 +176,7 @@ export const servicesData = {
         text: "Email Us",
         icon: "mail",
         type: "secondary",
-        href: "mailto:contact@primeghar.com",
+        href: "mailto:primegharofficial@gmail.com",
       },
     ],
   },
