@@ -513,7 +513,7 @@ export default function ServicesPage() {
   }, [activeCategory, searchQuery]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+    <div className="min-h-screen ">
       {/* Hero Header */}
       <section className="pt-32 pb-8 px-4">
         <div className="max-w-7xl mx-auto text-center">
