@@ -149,7 +149,7 @@ export const servicesData = {
     subtitle:
       "Experience the best in bathroom cleaning with our professional services.",
     buttonText: "Book now",
-    buttonColor: "bg-blue-600 hover:bg-blue-700",
+    buttonColor: "bg-blue-600 text-white hover:bg-blue-700",
     image: {
       src: "./bathroom-cleaning-service.webp",
       alt: "Professional cleaning",

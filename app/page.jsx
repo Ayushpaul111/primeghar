@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/app/components/ui/card";
 import { Button } from "@/app/components/ui/button";
 import { getCalApi } from "@calcom/embed-react";
 import { servicesData } from "@/app/data/data.js";
+import Hero from "./components/ui/hero";
 
 // Animation variants
 const fadeInUp = {
@@ -16,148 +17,6 @@ const fadeInUp = {
     transition: { duration: 0.6, ease: "easeOut" },
   },
 };
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-const staggerItem = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.4, ease: "easeOut" },
-  },
-};
-
-// Component for Quick Service Grid
-const QuickServiceGrid = ({ services }) => (
-  <motion.div
-    className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 mb-10"
-    variants={staggerContainer}
-    initial="hidden"
-    whileInView="visible"
-    viewport={{ once: true, margin: "-50px" }}
-  >
-    {services.map((service, index) => (
-      <motion.a
-        key={index}
-        href={service.href}
-        className="group relative p-3 rounded-2xl bg-white/70 border border-gray-200 
-                   shadow-sm backdrop-blur-sm text-center cursor-pointer 
-                   hover:shadow-xl hover:border-blue-300 transition-all duration-300"
-        variants={staggerItem}
-        whileHover={{ scale: 1.08 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        {/* Icon Badge */}
-        <div
-          className="mx-auto mb-3 flex h-12 w-12 items-center justify-center 
-                        rounded-full bg-gradient-to-br from-blue-100 to-blue-200 
-                        text-blue-600 group-hover:from-blue-200 group-hover:to-blue-300 
-                        transition-colors duration-300"
-        >
-          <span className="text-xl">{service.icon}</span>
-        </div>
-
-        {/* Label */}
-        <div className="text-sm font-medium text-gray-800 group-hover:text-blue-700 transition-colors">
-          {service.label}
-        </div>
-
-        {/* Subtle Glow Effect */}
-        <div
-          className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-100/20 to-purple-100/20 
-                        opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-        />
-      </motion.a>
-    ))}
-  </motion.div>
-);
-
-// Component for Hero Images
-const HeroImages = ({ images }) => (
-  <motion.div
-    className="grid grid-cols-2 gap-4"
-    initial="hidden"
-    animate="visible"
-    variants={staggerContainer}
-  >
-    <div className="space-y-4">
-      <motion.img
-        src={images[0].src}
-        alt={images[0].alt}
-        className={images[0].className}
-        variants={staggerItem}
-      />
-      <motion.img
-        src={images[1].src}
-        alt={images[1].alt}
-        className={images[1].className}
-        variants={staggerItem}
-      />
-    </div>
-    <div className="space-y-4 pt-8">
-      <motion.img
-        src={images[2].src}
-        alt={images[2].alt}
-        className={images[2].className}
-        variants={staggerItem}
-      />
-      <motion.img
-        src={images[3].src}
-        alt={images[3].alt}
-        className={images[3].className}
-        variants={staggerItem}
-      />
-    </div>
-  </motion.div>
-);
-
-// Component for Featured Services Cards
-// const FeaturedServicesCards = ({ services }) => (
-//   <motion.div
-//     className="grid md:grid-cols-3 gap-10"
-//     variants={staggerContainer}
-//     initial="hidden"
-//     whileInView="visible"
-//     viewport={{ once: true, margin: "-50px" }}
-//   >
-//     {services.map((service, index) => (
-//       <motion.div
-//         key={index}
-//         variants={staggerItem}
-//         className="group flex flex-col justify-between border-b border-gray-200 pb-6 hover:translate-y-[-4px] transition-transform duration-300"
-//       >
-//         {/* Title */}
-//         <h3 className="text-xl font-bold tracking-tight text-gray-900 group-hover:text-gray-700 transition-colors">
-//           {service.title}
-//         </h3>
-
-//         {/* Description */}
-//         <p className="mt-3 text-base leading-relaxed text-gray-600">
-//           {service.description}
-//         </p>
-
-//         {/* CTA */}
-//         <div className="mt-6">
-//           <button
-//             className={`px-4 py-2 text-sm font-medium rounded-full shadow-sm transition-all duration-300 ${service.buttonColor}`}
-//           >
-//             Book now →
-//           </button>
-//         </div>
-//       </motion.div>
-//     ))}
-//   </motion.div>
-// );
 
 const ServiceCards = ({ services }) => (
   <motion.div
@@ -249,7 +108,7 @@ const CtaSection = ({ data }) => (
 
 // Component for Final CTA
 const FinalCta = ({ data }) => (
-  <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+  <section className="py-20 bg-gradient-to-r from-blue-900 to-blue-950 text-white">
     <div className="max-w-4xl mx-auto px-4 text-center">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -310,50 +169,15 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#f4f4f4] pt-28">
       {/* Hero Section */}
-      <section className="px-4  py-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
-            <div>
-              <motion.div
-                className="mb-4"
-                initial="hidden"
-                animate="visible"
-                variants={fadeInUp}
-              >
-                <h1 className="text-4xl md:text-5xl font-bold text-gray-900 ">
-                  Home services at your&nbsp;
-                  <span className="relative">
-                    <span className="text-[#ef8e0f]">doorstep</span>
-                    <img
-                      className="absolute md:w-40 w-35 -bottom-16 md:-bottom-20 right-0"
-                      src="./red-line.png"
-                      alt="Hero image"
-                    />
-                  </span>
-                </h1>
-                <p className="text-lg text-gray-600 mt-2">
-                  Book home services with ease and convenience in Cooch Behar.
-                </p>
-              </motion.div>
-
-              <div className="mb-8">
-                <div
-                  className="relative cursor-pointer"
-                  // onClick={() => setShowSearchModal(true)}
-                >
-                  {/* <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                  <div className="pl-10 py-3 text-base border border-gray-300 rounded-md bg-white hover:border-gray-400 transition-colors">
-                    <span className="text-gray-500">Search for services</span>
-                  </div> */}
-                </div>
-              </div>
-
-              <QuickServiceGrid services={servicesData.quickServices} />
-            </div>
-
-            <HeroImages images={servicesData.heroImages} />
-          </div>
-        </div>
+      <section className="">
+        <motion.div
+          className="mb-4"
+          initial="hidden"
+          animate="visible"
+          variants={fadeInUp}
+        >
+          <Hero />
+        </motion.div>
       </section>
 
       {/* Featured Services Section */}
