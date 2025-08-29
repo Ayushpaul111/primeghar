@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+/* Body = Source Serif 4 */
+body { font-family: var(--font-sourceserif); }
+
+/* Main headings = Cormorant Garamond */
+h1, h2 { font-family: var(--font-cormorant); }
+
+/* Subheadings = Open Sans */
+h3, h4, h5, h6 { font-family: var(--font-opensans); }
+
+
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

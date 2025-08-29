@@ -1,17 +1,26 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import {
+  Cormorant_Garamond,
+  Open_Sans,
+  Source_Serif_4,
+} from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import WhatsAppFloatingButton from "./components/WhatsAppFloatingButton";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
+  variable: "--font-cormorant",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const openSans = Open_Sans({
   subsets: ["latin"],
+  variable: "--font-opensans",
+});
+
+const sourceSerif = Source_Serif_4({
+  subsets: ["latin"],
+  variable: "--font-sourceserif",
 });
 
 export const metadata = {
@@ -23,6 +32,8 @@ export const metadata = {
   description:
     "Professional home services in Cooch Behar, West Bengal. Expert cleaning services, maid services, plumbing repair, electrical repair, electronic repair, wooden repair, helper services & aya mashi. Book trusted professionals today!",
   keywords: [
+    "primeghar",
+    "prime ghar",
     // Core services
     "home services Cooch Behar",
     "cleaning services Cooch Behar",
@@ -237,7 +248,7 @@ export default function RootLayout({ children }) {
         <meta name="ICBM" content="26.3217, 89.4535" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${cormorant.variable} ${openSans.variable} ${sourceSerif.variable} antialiased`}
       >
         <Header />
         {children}

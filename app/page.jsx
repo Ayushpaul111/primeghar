@@ -320,12 +320,12 @@ export default function HomePage() {
                 animate="visible"
                 variants={fadeInUp}
               >
-                <h1 className="text-4xl font-bold text-gray-900 ">
+                <h1 className="text-4xl md:text-5xl font-bold text-gray-900 ">
                   Home services at your&nbsp;
                   <span className="relative">
                     <span className="text-[#ef8e0f]">doorstep</span>
                     <img
-                      className="absolute md:w-40 w-35 -bottom-18 md:-bottom-20 right-0"
+                      className="absolute md:w-40 w-35 -bottom-16 md:-bottom-20 right-0"
                       src="./red-line.png"
                       alt="Hero image"
                     />
@@ -367,7 +367,7 @@ export default function HomePage() {
       <section className="px-4 py-12">
         <div className="max-w-7xl mx-auto">
           <motion.h2
-            className="text-3xl font-bold text-gray-900 mb-8"
+            className="text-3xl md:text-4xl font-bold text-gray-900 mb-8"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
@@ -383,7 +383,7 @@ export default function HomePage() {
       <section className="px-4 py-12 ">
         <div className="max-w-7xl mx-auto">
           <motion.h2
-            className="text-3xl font-bold text-gray-900 mb-8"
+            className="text-3xl md:text-4xl font-bold text-gray-900 mb-8"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
