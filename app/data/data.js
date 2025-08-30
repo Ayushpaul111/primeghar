@@ -1,49 +1,7 @@
 // services-data.js
 export const servicesData = {
-  // Quick access services (grid icons)
-  quickServices: [
-    {
-      icon: "🔧",
-      label: "Helper Services",
-      href: "/services",
-    },
-    {
-      icon: "🪵",
-      label: "Wooden Repair",
-      href: "/services",
-    },
-    {
-      icon: "🚰",
-      label: "Plumbing Repair",
-      href: "/services",
-    },
-    {
-      icon: "⚡",
-      label: "Electrical Repair",
-      href: "/services",
-    },
-    {
-      icon: "📱",
-      label: "Electronic Repair",
-      href: "/services",
-    },
-    {
-      icon: "🧹",
-      label: "Maid Services",
-      href: "/services",
-    },
-    {
-      icon: "🧽",
-      label: "Cleaning Services",
-      href: "/services",
-    },
-    {
-      icon: "👩‍⚕️",
-      label: "Aya Mashi",
-      href: "/servicesjpg", // Original href preserved
-    },
-  ],
-
+  googleFormLink:
+    "https://docs.google.com/forms/d/e/1FAIpQLScAuwxbbOFQyXBs_7Y7jPBnDsoYzmtepTDS27HXV0AoSMXAWw/formResponse",
   // Featured service cards
   featuredServices: [
     {

@@ -11,7 +11,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="bg-white text-gray-600 py-8">
+    <footer className="bg-gradient-to-b from-transparent to-white text-gray-600 py-8">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center border-t border-gray-200 pt-6">
           {/* Logo and Tagline */}
@@ -40,11 +40,11 @@ const Footer = () => {
                   Home
                 </Link>
               </li>
-              {/* <li>
+              <li>
                 <Link href="/about-us" className="hover:text-gray-900">
                   About Us
                 </Link>
-              </li> */}
+              </li>
               <li>
                 <Link href="/services" className="hover:text-gray-900">
                   Our Services
@@ -110,17 +110,18 @@ const Footer = () => {
         </div>
         <div className="mt-6 text-center text-xs text-gray-400">
           © 2025 Primeghar. All rights reserved. |{" "}
-          {/* <Link href="#" className="hover:text-gray-900">
+          <Link href="/TermsAndConditions" className="hover:text-gray-900">
             Terms & Conditions
           </Link>{" "}
-          |{" "}
+          {/* |{" "}
           <Link href="#" className="hover:text-gray-900">
             Privacy Policy
           </Link>{" "}
           |{" "}
           <Link href="#" className="hover:text-gray-900">
             Cookies
-          </Link> */}
+          </Link>{" "}
+           */}
         </div>
       </div>
     </footer>

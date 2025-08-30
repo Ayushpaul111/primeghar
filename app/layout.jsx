@@ -32,8 +32,8 @@ export const metadata = {
   description:
     "Professional home services in Cooch Behar, West Bengal. Expert cleaning services, maid services, plumbing repair, electrical repair, electronic repair, wooden repair, helper services & aya mashi. Book trusted professionals today!",
   keywords: [
-    "primeghar",
     "prime ghar",
+    "primeghar",
     // Core services
     "home services Cooch Behar",
     "cleaning services Cooch Behar",
@@ -83,7 +83,7 @@ export const metadata = {
     description:
       "Get reliable home services in Cooch Behar including cleaning, maid services, plumbing, electrical & electronic repair, wooden repair, helper services. Book trusted professionals today!",
     url: "https://primeghar.com",
-    siteName: "PrimeGhar",
+    siteName: "Prime Ghar",
     locale: "en_IN",
     type: "website",
     images: [
@@ -113,11 +113,6 @@ export const metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    // Add your verification codes here when you get them
-    // google: 'your-google-verification-code',
-    // bing: 'your-bing-verification-code',
-  },
   category: "Home Services",
   classification: "Business",
   other: {
@@ -143,7 +138,7 @@ const structuredData = {
   image: "https://primeghar.com/logo.png",
   url: "https://primeghar.com",
   telephone: "+919064995568",
-  email: "contact@primeghar.com",
+  email: "primegharofficial@gmail.com",
   address: {
     "@type": "PostalAddress",
     streetAddress: "Cooch Behar",
@@ -169,6 +164,7 @@ const structuredData = {
   ],
   serviceType: [
     "Home Cleaning Services",
+    "Car Wash Services",
     "Maid Services",
     "Plumbing Repair",
     "Electrical Repair",

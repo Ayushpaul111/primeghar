@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { servicesData } from "@/app/data/data";
+import { MopBucket, ScrewDriver, Wrench } from "./svgs";
 
 const staggerItem = {
   hidden: { opacity: 0, y: 20 },
@@ -75,6 +76,23 @@ const HeroImages = ({ images }) => (
   </motion.div>
 );
 
+// Add this above your Hero component
+const FloatingIcon = ({ children, className, delay = 0 }) => (
+  <motion.div
+    initial={{ y: 0, rotate: 0 }}
+    animate={{ y: [0, -10, 0], rotate: [0, 5, -5, 0] }}
+    transition={{
+      duration: 4,
+      repeat: Infinity,
+      ease: "easeInOut",
+      delay,
+    }}
+    className={`absolute ${className} text-gray-400/40 w-10 h-10`}
+  >
+    {children}
+  </motion.div>
+);
+
 const Hero = () => {
   const [submitted, setSubmitted] = useState(false);
 
@@ -113,6 +131,21 @@ const Hero = () => {
       <div className="relative w-full flex flex-col justify-center items-center">
         {/* Hero Section */}
         <div className="relative w-full rounded-3xl overflow-hidden bg-white">
+          <FloatingIcon className=" hidden md:block  top-20 left-40 opacity-10">
+            <MopBucket />
+          </FloatingIcon>
+          <FloatingIcon
+            className=" hidden md:block  top-40 right-12 opacity-10"
+            delay={1}
+          >
+            <ScrewDriver />
+          </FloatingIcon>
+          <FloatingIcon
+            className=" hidden md:block  bottom-20 left-1/3 opacity-10"
+            delay={2}
+          >
+            <Wrench />
+          </FloatingIcon>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center p-8 md:p-12">
             {/* Left: Text */}
             <div className="z-10">
@@ -146,7 +179,7 @@ const Hero = () => {
           <form
             method="POST"
             target="hidden_iframe"
-            action="https://docs.google.com/forms/d/e/1FAIpQLScAuwxbbOFQyXBs_7Y7jPBnDsoYzmtepTDS27HXV0AoSMXAWw/formResponse"
+            action={servicesData.googleFormLink}
             onSubmit={handleSubmit}
             className="grid grid-cols-1 md:grid-cols-4 gap-4 relative"
           >
@@ -159,7 +192,7 @@ const Hero = () => {
                 disabled={submitted}
                 className="w-full border border-gray-300 rounded-lg px-3 py-3"
               >
-                <option value="" disabled selected>
+                <option value="" disabled defaultValue={""}>
                   Select category
                 </option>
                 <option value="Maid Services">Maid Services</option>

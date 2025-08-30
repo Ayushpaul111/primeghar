@@ -1,12 +1,11 @@
 "use client";
-import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Phone, Mail, Search, ArrowUpRight } from "lucide-react";
 import { Card, CardContent } from "@/app/components/ui/card";
 import { Button } from "@/app/components/ui/button";
-import { getCalApi } from "@calcom/embed-react";
 import { servicesData } from "@/app/data/data.js";
 import Hero from "./components/ui/hero";
+import CalBooking from "./components/CalBooking";
 
 // Animation variants
 const fadeInUp = {
@@ -124,18 +123,16 @@ const FinalCta = ({ data }) => (
 
             if (button.type === "primary") {
               return (
-                <motion.button
+                <CalBooking
                   key={index}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  namespace={button.calData.namespace}
+                  calLink={button.calData.link}
+                  calConfig={button.calData.config}
                   className="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-blue-50 transition-colors flex items-center"
-                  data-cal-namespace={button.calData.namespace}
-                  data-cal-link={button.calData.link}
-                  data-cal-config={button.calData.config}
                 >
                   <IconComponent className="mr-2 w-5 h-5" />
                   {button.text}
-                </motion.button>
+                </CalBooking>
               );
             } else {
               return (
@@ -159,13 +156,6 @@ const FinalCta = ({ data }) => (
 );
 
 export default function HomePage() {
-  useEffect(() => {
-    (async function () {
-      const cal = await getCalApi({ namespace: "primeghar" });
-      cal("ui", { hideEventTypeDetails: false, layout: "month_view" });
-    })();
-  }, []);
-
   return (
     <div className="min-h-screen bg-[#f4f4f4] pt-28">
       {/* Hero Section */}
