@@ -299,7 +299,7 @@ const Hero = () => {
                       Form Submitted!
                     </h2>
                     <p className="text-sm sm:text-base text-gray-600">
-                      We’ll contact you soon.
+                      We&apos;ll get back to you shortly.
                     </p>
                   </div>
                 </motion.div>

@@ -28,7 +28,7 @@ export const servicesData = {
   // New and noteworthy services
   newServices: [
     {
-      title: "Electronic Repair",
+      title: "Electrical Services",
       image: "./Professional-Electrician.webp",
       href: "/services", // Original href preserved
     },
@@ -64,9 +64,9 @@ export const servicesData = {
       href: "/services",
     },
     {
-      title: "Electrical Repair",
-      description: "Safe electrical installations",
-      image: "./Professional-Electrician.webp",
+      title: "Electronics Repair (TV, Fridge)",
+      description: "Electrical repairs right at your doorstep",
+      image: "./electrical-repair.webp",
       href: "/services",
     },
     {
@@ -96,7 +96,7 @@ export const servicesData = {
     },
     {
       src: "./Professional-Electrician.webp",
-      alt: "Repair service",
+      alt: "Electrical service",
       className: "w-full h-48 object-cover rounded-lg",
     },
   ],
@@ -119,23 +119,5 @@ export const servicesData = {
     title: "Ready to Book Your Home Service?",
     subtitle:
       "Get started today with our professional home services and let our experts take care of your household needs",
-    buttons: [
-      {
-        text: "Book Consultation",
-        icon: "phone",
-        type: "primary",
-        calData: {
-          namespace: "primeghar",
-          link: "ayush-paul/primeghar",
-          config: '{"layout":"month_view"}',
-        },
-      },
-      {
-        text: "Email Us",
-        icon: "mail",
-        type: "secondary",
-        href: "mailto:primegharofficial@gmail.com",
-      },
-    ],
   },
 };

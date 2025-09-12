@@ -10,11 +10,10 @@ import {
   Phone,
   Calendar,
   CheckCircle,
-  ArrowRight,
+  ArrowUpRight,
   Sparkles,
   ChevronDown,
 } from "lucide-react";
-import { Card, CardContent } from "@/app/components/ui/card";
 import { Button } from "@/app/components/ui/button";
 import { getCalApi } from "@calcom/embed-react";
 
@@ -31,14 +30,35 @@ const servicesData = {
 
   services: [
     {
+      id: 4,
+      title: "Event Decoration",
+      category: "Event Services",
+      image: "./eventManagement/event-decoration-1.webp",
+      price: "₹500",
+      description:
+        "Customize your event with our professional event decoration services.",
+      features: ["Customizable Designs", "Unique Designs"],
+      tags: [
+        "carpenter",
+        "furniture assembly",
+        "wood polish",
+        "restoration",
+        "birthday",
+        "wedding",
+        "anniversary",
+        "corporate",
+        "event",
+        "party",
+        "decoration",
+      ],
+      popular: true,
+    },
+    {
       id: 1,
       title: "Professional Plumbing Repair",
       category: "Repair Services",
       image: "./plumber.webp",
       price: "₹100",
-      duration: "45-60 min",
-      rating: 4.8,
-      reviews: 234,
       description:
         "Expert plumbing solutions for leaks, blockages, and installations",
       features: [
@@ -48,7 +68,6 @@ const servicesData = {
         "1 Year Warranty",
       ],
       tags: ["plumbing", "leak repair", "pipe installation", "emergency"],
-      popular: true,
     },
     {
       id: 2,
@@ -56,10 +75,8 @@ const servicesData = {
       category: "Cleaning Services",
       image: "./cleaning-services.webp",
       price: "₹300",
-      duration: "2-3 hours",
-      rating: 4.9,
-      reviews: 456,
-      description: "Complete home deep cleaning with eco-friendly products",
+      description:
+        "Complete home deep cleaning with eco-friendly products or products of your choice.",
       features: [
         "Eco-friendly Products",
         "Trained Staff",
@@ -80,9 +97,6 @@ const servicesData = {
       category: "Repair Services",
       image: "./Professional-Electrician.webp",
       price: "₹100",
-      duration: "30-90 min",
-      rating: 4.7,
-      reviews: 189,
       description:
         "Safe electrical repairs and new installations by certified electricians",
       features: [
@@ -94,35 +108,13 @@ const servicesData = {
       tags: ["electrician", "wiring", "fan installation", "lighting"],
     },
     {
-      id: 4,
-      title: "Wooden Furniture Repair",
-      category: "Repair Services",
-      image: "./helper-services.webp",
-      price: "₹250",
-      duration: "60-90 min",
-      rating: 4.6,
-      reviews: 98,
-      description:
-        "Professional wooden furniture repair and restoration services",
-      features: [
-        "Skilled Craftsmen",
-        "Quality Materials",
-        "Custom Solutions",
-        "Affordable Rates",
-      ],
-      tags: ["carpenter", "furniture assembly", "wood polish", "restoration"],
-    },
-    {
       id: 5,
       title: "Electronic Device Repair",
       category: "Electronic Services",
-      image: "./Professional-Electrician.webp",
+      image: "./electrical-repair.webp",
       price: "₹100",
-      duration: "30-60 min",
-      rating: 4.5,
-      reviews: 156,
       description:
-        "Expert repair for smartphones, laptops, and home electronics",
+        "Expert repair for TV, fridge, laptops, and home electronics.",
       features: [
         "Genuine Parts",
         "Quick Service",
@@ -137,9 +129,6 @@ const servicesData = {
       category: "Helper Services",
       image: "./maid.webp",
       price: "₹300/Day",
-      duration: "2-4 hours",
-      rating: 4.8,
-      reviews: 298,
       description:
         "Reliable daily, weekly or monthly maid services for your home",
       features: [
@@ -157,9 +146,6 @@ const servicesData = {
       category: "Helper Services",
       image: "./helper-services.webp",
       price: "₹199",
-      duration: "1-2 hours",
-      rating: 4.4,
-      reviews: 167,
       description:
         "Multi-purpose helper for various household tasks and assistance",
       features: [
@@ -176,9 +162,6 @@ const servicesData = {
       category: "Specialized Services",
       image: "./ayamashi.webp",
       price: "₹399",
-      duration: "4-12 hours",
-      rating: 4.9,
-      reviews: 87,
       description:
         "Professional caregiving services for elderly and patient care",
       features: [
@@ -195,10 +178,8 @@ const servicesData = {
       category: "Cleaning Services",
       image: "./car-washing-services.webp",
       price: "₹350",
-      duration: "45-60 min",
-      rating: 4.7,
-      reviews: 134,
-      description: "Professional car washing and detailing at your doorstep",
+      description:
+        "Professional car washing and detailing at your doorstep with pressure washing machines.",
       features: [
         "Water-less Cleaning",
         "Premium Products",
@@ -213,9 +194,6 @@ const servicesData = {
       category: "Cleaning Services",
       image: "./bathroom-cleaning-service.webp",
       price: "₹300",
-      duration: "1-2 hours",
-      rating: 4.8,
-      reviews: 203,
       description: "Specialized bathroom cleaning and sanitization service",
       features: [
         "Deep Sanitization",
@@ -224,6 +202,7 @@ const servicesData = {
         "Odor Elimination",
       ],
       tags: ["bathroom cleaning", "toilet cleaning", "sanitization", "hygiene"],
+      popular: true,
     },
   ],
 };
@@ -268,134 +247,137 @@ const dropdownVariants = {
 };
 
 // Service Card Component
-const ServiceCard = ({ service }) => (
+const ServiceCard = ({ service, index }) => (
   <motion.div
+    key={index}
     variants={staggerItem}
     whileHover={{ y: -8 }}
     className="group relative"
   >
-    <Card className="overflow-hidden border-0 shadow-md hover:shadow-2xl transition-all duration-500 bg-white">
-      <CardContent className="p-0">
-        <div className="relative">
-          {/* Service Image */}
-          <div className="relative overflow-hidden">
-            <img
-              src={service.image}
-              alt={service.title}
-              className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
-            />
+    <div className="rounded-2xl bg-white shadow-md hover:shadow-2xl p-3 h-full flex flex-col transition-all duration-500">
+      {/* Title and Description */}
+      <div className="mb-3">
+        <div className="flex items-start justify-between mb-2">
+          <h3 className="text-base sm:text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+            {service.title}
+          </h3>
+        </div>
+        {service.description && (
+          <p className="text-sm text-gray-500 mb-2">{service.description}</p>
+        )}
 
-            {/* Popular Badge */}
-            {service.popular && (
-              <div className="absolute top-3 left-3">
-                <span className="bg-gradient-to-r from-orange-400 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full flex items-center">
-                  <Sparkles className="w-3 h-3 mr-1" />
-                  Popular
-                </span>
-              </div>
-            )}
+        {/* Rating, Price, Duration */}
+        {/* <div className="flex items-center justify-between text-xs text-gray-600 mb-2">
+          <div className="flex items-center">
+            <Star className="w-3 h-3 fill-yellow-400 text-yellow-400 mr-1" />
+            <span className="font-semibold">{service.rating}</span>
+            <span className="ml-1">({service.reviews})</span>
+          </div>
+          <div className="flex items-center">
+            <Clock className="w-3 h-3 mr-1" />
+            {service.duration}
+          </div>
+        </div> */}
 
-            {/* Price Badge */}
-            <div className="absolute top-3 right-3">
-              <span className="bg-white/90 backdrop-blur-sm text-gray-900 font-bold px-3 py-1 rounded-full text-sm">
-                Starting {service.price}
+        {/* Price */}
+        <div className="flex items-center justify-between mb-2">
+          <div className="text-left">
+            <span className="bg-blue-50 text-blue-700 font-bold px-2 py-1 rounded-md text-sm">
+              From {service.price}
+            </span>
+          </div>
+          {service.popular && (
+            <div className="text-right">
+              <span className="bg-gradient-to-r from-orange-400 to-pink-500 text-white text-xs font-bold px-2 py-1 rounded-full flex items-center ml-2">
+                <Sparkles className="w-2 h-2 mr-1" />
+                Popular
               </span>
             </div>
-
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          </div>
-
-          {/* Service Content */}
-          <div className="p-6">
-            {/* Service Header */}
-            <div className="flex items-start justify-between mb-3">
-              <div>
-                <h3 className="font-bold text-lg text-gray-900 group-hover:text-blue-600 transition-colors">
-                  {service.title}
-                </h3>
-                <p className="text-gray-600 text-sm mt-1">
-                  {service.description}
-                </p>
-              </div>
-            </div>
-
-            {/* Rating & Reviews */}
-            <div className="flex items-center gap-4 mb-4">
-              <div className="flex items-center">
-                <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                <span className="text-sm font-semibold text-gray-700 ml-1">
-                  {service.rating}
-                </span>
-                <span className="text-sm text-gray-500 ml-1">
-                  ({service.reviews} reviews)
-                </span>
-              </div>
-              <div className="flex items-center text-sm text-gray-500">
-                <Clock className="w-4 h-4 mr-1" />
-                {service.duration}
-              </div>
-            </div>
-
-            {/* Features */}
-            <div className="mb-6">
-              <div className="grid grid-cols-2 gap-2">
-                {service.features.slice(0, 4).map((feature, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center text-xs text-gray-600"
-                  >
-                    <CheckCircle className="w-3 h-3 text-green-500 mr-1 flex-shrink-0" />
-                    <span className="truncate">{feature}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex gap-3">
-              <a
-                href={`https://wa.me/919064995568?text=I'm%20interested%20in%20${encodeURIComponent(
-                  service.title
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button className="px-4 py-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-green-200">
-                  <svg
-                    width="28"
-                    height="28"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="transition-transform duration-300 group-hover:rotate-12"
-                  >
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.63z" />
-                  </svg>
-                </Button>
-              </a>
-              <Button
-                className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-3 rounded-lg transition-all duration-300 group-hover:shadow-lg group-hover:shadow-blue-200"
-                data-cal-namespace="primeghar"
-                data-cal-link="ayush-paul/primeghar"
-                data-cal-config='{"layout":"month_view"}'
-              >
-                <Calendar className="w-4 h-4 mr-2" />
-                Book Now
-              </Button>
-              <a
-                href="tel:+919064995568"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button className="px-4 py-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-0 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-green-200">
-                  <Phone className="w-4 h-4" />
-                </Button>
-              </a>
-            </div>
-          </div>
+          )}
         </div>
-      </CardContent>
-    </Card>
+      </div>
+
+      {/* Image */}
+      <div className="relative rounded-xl overflow-hidden aspect-square mb-3 flex-shrink-0">
+        <img
+          src={service.image}
+          alt={service.title}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+
+        {/* Gradient Overlay on Hover */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+        {/* Arrow Button */}
+        <a
+          href={service.href}
+          className="absolute bottom-2 right-2 w-8 h-8 flex items-center justify-center rounded-full bg-white/90 backdrop-blur-sm shadow-md border border-gray-200 hover:bg-white transition-all duration-200"
+        >
+          <ArrowUpRight className="w-4 h-4 text-gray-800" />
+        </a>
+      </div>
+
+      {/* Features - Show top 2 */}
+      <div className="mb-4 flex-grow">
+        <div className="space-x-4 flex flex-row justify-center">
+          {service.features.slice(0, 2).map((feature, index) => (
+            <div
+              key={index}
+              className="flex items-center text-xs text-gray-600"
+            >
+              <CheckCircle className="w-3 h-3 text-green-500 mr-2 flex-shrink-0" />
+              <span className="truncate">{feature}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Action Buttons */}
+      {/* Professional Action Buttons */}
+      <div className="space-y-2 mt-auto">
+        {/* Primary Book Button */}
+        <button
+          className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 hover:shadow-lg flex items-center justify-center group/btn"
+          data-cal-namespace="primeghar"
+          data-cal-link="ayush-paul/primeghar"
+          data-cal-config='{"layout":"month_view"}'
+        >
+          <Calendar className="w-4 h-4 mr-2" />
+          Book Service
+        </button>
+
+        {/* Secondary Contact Buttons */}
+        <div className="grid grid-cols-2 gap-2">
+          <a
+            href={`https://wa.me/919064995568?text=I'm%20interested%20in%20${encodeURIComponent(
+              service.title
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button className="w-full py-2.5 px-3 bg-white border border-gray-200 hover:border-green-500 hover:bg-green-50 text-gray-700 hover:text-green-600 font-medium rounded-lg transition-all duration-300 flex items-center justify-center group/whatsapp">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="mr-2 text-green-600"
+              >
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.63z" />
+              </svg>
+              WhatsApp
+            </button>
+          </a>
+
+          <a href="tel:+919064995568" target="_blank" rel="noopener noreferrer">
+            <button className="w-full py-2.5 px-3 bg-white border border-gray-200 hover:border-blue-500 hover:bg-blue-50 text-gray-700 hover:text-blue-600 font-medium rounded-lg transition-all duration-300 flex items-center justify-center group/phone">
+              <Phone className="w-4 h-4 mr-2 text-blue-600" />
+              Call
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
   </motion.div>
 );
 

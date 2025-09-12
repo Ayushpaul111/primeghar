@@ -1,11 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
 import { Phone, Mail, Search, ArrowUpRight } from "lucide-react";
-import { Card, CardContent } from "@/app/components/ui/card";
-import { Button } from "@/app/components/ui/button";
 import { servicesData } from "@/app/data/data.js";
 import Hero from "./components/ui/hero";
-import CalBooking from "./components/CalBooking";
+// import CalBooking from "./components/CalBooking";
 
 // Animation variants
 const fadeInUp = {
@@ -65,43 +63,46 @@ const CtaSection = ({ data }) => (
     viewport={{ once: true, margin: "-50px" }}
     variants={fadeInUp}
   >
-    <Card className="border-0 overflow-hidden">
-      <CardContent className="p-0 relative">
-        <div className="relative h-96 md:h-[500px]">
-          {/* Background Image */}
-          <img
-            src={data.image.src}
-            alt={data.image.alt}
-            className="w-full h-full object-cover"
-          />
+    <div
+      className="relative rounded-3xl overflow-hidden bg-cover bg-center 
+                 h-64 sm:h-72 md:h-80 lg:h-96 xl:h-[400px]
+                 w-full max-w-full mx-auto "
+      style={{
+        backgroundImage: `url(${data.image.src})`,
+      }}
+    >
+      {/* Content */}
+      <div className="relative z-10 p-4 sm:p-6 md:p-8 lg:p-12 h-full flex flex-col justify-center">
+        <h1
+          className="text-white 
+                       text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 
+                       font-serif font-bold mb-2 sm:mb-3 md:mb-4 lg:mb-6
+                       leading-tight max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl"
+        >
+          {data.title}
+        </h1>
 
-          {/* Overlay for better text readability */}
-          <div className="absolute inset-0 bg-black/20"></div>
-
-          {/* Content Overlay */}
-          <div className="absolute inset-0 flex items-center">
-            <div className="container mx-auto px-8">
-              <div className="max-w-lg">
-                <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
-                  {data.title}
-                </h2>
-                <p className="text-white/90 text-lg mb-8 drop-shadow-md">
-                  {data.subtitle}
-                </p>
-                <a href="/services">
-                  <Button
-                    size="lg"
-                    className={`${data.buttonColor} px-8 py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300`}
-                  >
-                    {data.buttonText}
-                  </Button>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
+        <p
+          className="text-white 
+                      text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl
+                      opacity-90 mb-4 sm:mb-6 md:mb-8 lg:mb-10
+                      max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl
+                      font-light"
+        >
+          {data.subtitle}
+        </p>
+        <a href="tel:+919064995568" target="_blank" rel="noopener noreferrer">
+          <button
+            className="bg-[#022b60] hover:bg-[#022b60]/90 text-white font-medium 
+          px-4 py-2 sm:px-6 sm:py-2.5 md:px-8 md:py-3 lg:px-10 lg:py-4
+          text-sm sm:text-base md:text-lg
+          rounded-lg transition-colors duration-300 w-fit"
+          >
+            Book now
+          </button>
+        </a>
+      </div>
+    </div>
   </motion.div>
 );
 
@@ -118,37 +119,25 @@ const FinalCta = ({ data }) => (
         <h2 className="text-4xl font-bold mb-6">{data.title}</h2>
         <p className="text-xl text-blue-100 mb-8">{data.subtitle}</p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          {data.buttons.map((button, index) => {
-            const IconComponent = button.icon === "phone" ? Phone : Mail;
+          <motion.a
+            href="tel:+919064995568"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-blue-50 transition-colors flex items-center"
+          >
+            <Phone className="mr-2 w-5 h-5" />
+            Call Now
+          </motion.a>
 
-            if (button.type === "primary") {
-              return (
-                <CalBooking
-                  key={index}
-                  namespace={button.calData.namespace}
-                  calLink={button.calData.link}
-                  calConfig={button.calData.config}
-                  className="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-blue-50 transition-colors flex items-center"
-                >
-                  <IconComponent className="mr-2 w-5 h-5" />
-                  {button.text}
-                </CalBooking>
-              );
-            } else {
-              return (
-                <motion.a
-                  key={index}
-                  href={button.href}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-blue-600 transition-colors flex items-center"
-                >
-                  <IconComponent className="mr-2 w-5 h-5" />
-                  {button.text}
-                </motion.a>
-              );
-            }
-          })}
+          <motion.a
+            href="mailto:primegharofficial@gmail.com"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-blue-600 transition-colors flex items-center"
+          >
+            <Mail className="mr-2 w-5 h-5" />
+            Mail
+          </motion.a>
         </div>
       </motion.div>
     </div>
