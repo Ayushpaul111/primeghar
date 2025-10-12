@@ -67,7 +67,7 @@ const WhatsAppFloatingButton = ({
       case "bottom-left":
         return "bottom-6 left-6";
       case "bottom-right":
-        return "bottom-6 right-6";
+        return "bottom-12 right-6";
       case "top-right":
         return "top-6 right-6";
       case "top-left":
@@ -80,7 +80,7 @@ const WhatsAppFloatingButton = ({
   return (
     <AnimatePresence>
       {isVisible && (
-        <div className={`fixed ${getPositionClasses()} z-50`}>
+        <div className={`fixed ${getPositionClasses()} bottom-4 z-50`}>
           {/* Tooltip */}
           <AnimatePresence>
             {showTooltipState && (

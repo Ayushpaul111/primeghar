@@ -7,6 +7,7 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import WhatsAppFloatingButton from "./components/WhatsAppFloatingButton";
+import AnnouncementsBar from "./components/ui/AnnouncementsBar";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -256,6 +257,7 @@ export default function RootLayout({ children }) {
           showTooltip={true}
           tooltipText="Need help? Chat with us!"
         />
+        <AnnouncementsBar />
       </body>
     </html>
   );
