@@ -202,10 +202,10 @@ const Header = () => {
           className={cn(
             "rounded-full px-4 sm:px-6 py-3",
             "flex items-center justify-between",
+            "backdrop-blur-xl border transition-all duration-500 ease-out",
             isScrolled
-              ? "bg-blue-900/80 backdrop-blur-md border-white/20"
-              : "bg-[#022b60]",
-            "shadow-lg border border-transparent transition-all duration-300 ease-out",
+              ? "bg-[#022b60]/75 border-white/25 shadow-2xl"
+              : "bg-[#022b60]/30 border-white/15 shadow-lg",
           )}
         >
           {/* Logo */}
@@ -300,13 +300,13 @@ const Header = () => {
           <div className="flex items-center gap-3 shrink-0">
             <motion.button
               className={cn(
-                "hidden sm:block text-sm font-medium px-5 sm:px-6 py-2 rounded-full whitespace-nowrap transition-all duration-300 ease-out",
+                "hidden sm:block text-sm font-medium px-5 sm:px-6 py-2 rounded-full whitespace-nowrap transition-all duration-300 ease-out border",
                 isScrolled
-                  ? "bg-blue-900 text-white"
-                  : "bg-blue-200 text-black",
+                  ? "bg-white text-[#022b60] border-transparent"
+                  : "bg-white/15 text-white border-white/30 backdrop-blur-sm",
               )}
               style={mounted ? { scale: textSize } : {}}
-              whileHover={{ scale: 1.05, backgroundColor: "#1D4ED8" }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               data-cal-namespace="primeghar"
               data-cal-link="ayush-paul/primeghar"
