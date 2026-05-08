@@ -20,14 +20,14 @@ function ProgressBar({
   const width = useTransform(scrollYProgress, [0, 1], ["100%", "0%"]);
   const opacity = useTransform(
     scrollYProgress,
-    [0, 0.04, 0.88, 0.97],
+    [0, 0.04, 0.82, 0.92],
     [0, 1, 1, 0],
   );
 
   return (
     <motion.div
       style={{ opacity }}
-      className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none"
+      className="absolute top-0 left-0 right-0 z-20 pointer-events-none"
     >
       <div className="relative h-[3px] w-full bg-blue-900">
         <motion.div

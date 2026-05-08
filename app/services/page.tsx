@@ -1,5 +1,4 @@
-const page = () => {
-  return <div className="min-h-screen pt-28 px-8">page</div>;
-};
-
-export default page;
+// forward this page to 360-virtual-tour page
+export default function ServicesPage() {
+  return <div>Services</div>;
+}
