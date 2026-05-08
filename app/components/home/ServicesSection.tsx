@@ -1,10 +1,16 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Cormorant_Garamond } from "next/font/google";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useMotionValueEvent,
+  MotionValue,
+} from "framer-motion";
 
 const cormorant = Cormorant_Garamond({
   weight: ["400", "600"],
@@ -82,12 +88,26 @@ function StackedCard({
   index,
   total,
   scrollYProgress,
+  isActive,
 }: Readonly<{
   service: Service;
   index: number;
   total: number;
   scrollYProgress: MotionValue<number>;
+  isActive: boolean;
 }>) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (isActive) {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  }, [isActive]);
+
   // Each card (except the first) slides up during its entry window
   const entryStart = index === 0 ? 0 : index / total - 0.05;
   const entryEnd = index === 0 ? 0 : index / total + 0.09;
@@ -121,7 +141,7 @@ function StackedCard({
             <video
               src={service.media.src}
               poster={service.media.contentType === "video" ? service.media.poster : undefined}
-              autoPlay
+              ref={videoRef}
               muted
               loop
               playsInline
@@ -169,10 +189,19 @@ function StackedCard({
 
 export default function ServicesSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end end"],
+  });
+
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    let next = 0;
+    for (let i = 1; i < SERVICES.length; i++) {
+      if (v >= i / SERVICES.length - 0.05) next = i;
+    }
+    setActiveIndex(next);
   });
 
   return (
@@ -211,6 +240,7 @@ export default function ServicesSection() {
               index={i}
               total={SERVICES.length}
               scrollYProgress={scrollYProgress}
+              isActive={i === activeIndex}
             />
           ))}
         </div>
