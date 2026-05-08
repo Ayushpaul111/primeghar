@@ -204,8 +204,8 @@ const Header = () => {
             "flex items-center justify-between",
             "backdrop-blur-xl border transition-all duration-500 ease-out",
             isScrolled
-              ? "bg-[#022b60]/75 border-white/25 shadow-2xl"
-              : "bg-[#022b60]/30 border-white/15 shadow-lg",
+              ? "bg-[#1a1a1a]/90 border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.8),inset_0_1px_0_rgba(255,255,255,0.07)]"
+              : "bg-[#0e0e0e]/60 border-white/8 shadow-[0_4px_20px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.04)]",
           )}
         >
           {/* Logo */}
