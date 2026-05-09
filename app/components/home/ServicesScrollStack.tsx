@@ -88,9 +88,9 @@ function StackedCard({
   return (
     <motion.div
       style={{ y, scale, zIndex: index }}
-      className="absolute inset-0"
+      className="absolute inset-0 sm:pb-8"
     >
-      <div className="h-full bg-white border border-mauve-400/20 rounded-2xl md:rounded-3xl overflow-hidden shadow-xl flex flex-col sm:flex-row">
+      <div className="h-[80%] sm:h-full bg-white border border-mauve-400/20 rounded-2xl md:rounded-3xl overflow-hidden shadow-xl flex flex-col sm:flex-row">
         {/* Media */}
         <div className="relative h-[45%] sm:h-full sm:w-[58%] shrink-0 overflow-hidden">
           {service.media.contentType === "video" ? (
@@ -169,7 +169,7 @@ export default function ServicesScrollStack({
   return (
     <section
       ref={sectionRef}
-      className="bg-[#F7F7F7]"
+      className="bg-[#ffffff]"
       style={{ height: `${(services.length + 1) * 100}vh` }}
     >
       <div className="sticky top-0 h-screen flex flex-col overflow-hidden">
@@ -179,7 +179,7 @@ export default function ServicesScrollStack({
         {children}
 
         {/* Card stack */}
-        <div className="relative flex-1 px-3 sm:px-8 md:px-14 lg:px-18 pb-4 sm:pb-8">
+        <div className="relative flex-1 px-3 sm:px-8 md:px-14 lg:px-18">
           {services.map((service, i) => (
             <StackedCard
               key={service.path}
