@@ -48,7 +48,7 @@ const jsonLd = {
 
 export default function FAQSection() {
   return (
-    <section className="bg-white px-6 sm:px-10 md:px-16 lg:px-20 pt-20 pb-24">
+    <section className="px-6 sm:px-10 md:px-16 lg:px-20 pt-20 pb-24">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

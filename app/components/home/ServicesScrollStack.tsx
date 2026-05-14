@@ -175,11 +175,12 @@ export default function ServicesScrollStack({
       <div className="sticky top-0 h-screen flex flex-col overflow-hidden">
         <ProgressBar scrollYProgress={scrollYProgress} />
 
-        {/* Heading slot — rendered by the server component */}
+        {/* Heading slot + card stack constrained to max width */}
+        <div className="flex flex-col flex-1 w-full max-w-[1600px] mx-auto overflow-hidden">
         {children}
 
         {/* Card stack */}
-        <div className="relative flex-1 px-3 sm:px-8 md:px-14 lg:px-18">
+        <div className="relative flex-1 px-3 sm:px-8 md:px-14 lg:px-18 pb-4 sm:pb-8">
           {services.map((service, i) => (
             <StackedCard
               key={service.path}
@@ -190,6 +191,7 @@ export default function ServicesScrollStack({
               isActive={i === activeIndex}
             />
           ))}
+        </div>
         </div>
       </div>
     </section>
