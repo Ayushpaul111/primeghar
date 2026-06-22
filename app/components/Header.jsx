@@ -7,6 +7,8 @@ import {
   LayoutGrid,
   Sparkles,
   Building2,
+  Hotel,
+  GraduationCap,
   ArrowRight,
   ChevronDown,
 } from "lucide-react";
@@ -53,6 +55,22 @@ const services = [
     title: "Virtual Renovation",
     description:
       "Turn a plot or unfinished construction into a stunning completed property visual for selling.",
+  },
+  {
+    id: "hotels-tour",
+    path: "/services/360-hotels-tour",
+    icon: Hotel,
+    title: "360° Tours for Hotels",
+    description:
+      "Immersive tours of suites, banquet halls and pools that turn browsers into direct bookings.",
+  },
+  {
+    id: "campus-tour",
+    path: "/services/360-campus-tour",
+    icon: GraduationCap,
+    title: "360° Campus Tours",
+    description:
+      "Let students and parents explore your entire campus online — and win more admissions from anywhere.",
   },
 ];
 
