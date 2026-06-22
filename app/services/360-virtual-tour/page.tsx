@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
-import Link from "next/link";
 import { ArrowRight, Globe, Eye, Clock, BadgeCheck } from "lucide-react";
 import { cormorant } from "@/app/components/home/services-data";
+import { pageMetadata } from "@/app/lib/seo";
 import ScrollArrow from "./_components/ScrollArrow";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "360° Virtual Tour for Properties | PrimeGhar",
   description:
     "Let buyers explore every room remotely with PrimeGhar's immersive 360° virtual property tours. No subscription required — one-time pricing, delivered in 48–72 hours.",
+  path: "/services/360-virtual-tour",
   keywords: [
     "360 virtual tour property",
     "virtual property tour India",
@@ -15,13 +15,9 @@ export const metadata: Metadata = {
     "immersive property walkthrough",
     "360 tour sell house faster",
   ],
-  openGraph: {
-    title: "360° Virtual Tour for Properties | PrimeGhar",
-    description:
-      "Immersive 360° tours that let buyers explore every room — no subscription required.",
-    type: "website",
-  },
-};
+  ogDescription:
+    "Immersive 360° tours that let buyers explore every room — no subscription required.",
+});
 
 const jsonLd = {
   "@context": "https://schema.org",

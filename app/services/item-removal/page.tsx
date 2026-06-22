@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Wand2, Camera, Zap, CheckCircle2 } from "lucide-react";
 import { cormorant } from "@/app/components/home/services-data";
+import { pageMetadata } from "@/app/lib/seo";
 import ScrollArrow from "./_components/ScrollArrow";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Item Removal & Virtual Cleaning for Property Photos | PrimeGhar",
   description:
     "Remove clutter, furniture, vehicles, and unwanted objects from your property photos with PrimeGhar. Clean, polished listing images delivered in 48 hours.",
+  path: "/services/item-removal",
   keywords: [
     "item removal property photos",
     "virtual cleaning real estate",
@@ -15,13 +16,10 @@ export const metadata: Metadata = {
     "object removal real estate photography",
     "clean property listing photos India",
   ],
-  openGraph: {
-    title: "Item Removal & Virtual Cleaning | PrimeGhar",
-    description:
-      "Remove unwanted items from your property photos for a clean, polished presentation every time.",
-    type: "website",
-  },
-};
+  ogTitle: "Item Removal & Virtual Cleaning | PrimeGhar",
+  ogDescription:
+    "Remove unwanted items from your property photos for a clean, polished presentation every time.",
+});
 
 const jsonLd = {
   "@context": "https://schema.org",

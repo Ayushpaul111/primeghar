@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -8,12 +7,14 @@ import {
   Layers,
 } from "lucide-react";
 import { cormorant } from "@/app/components/home/services-data";
+import { pageMetadata } from "@/app/lib/seo";
 import ScrollArrow from "./_components/ScrollArrow";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Virtual Renovation for Properties | PrimeGhar",
   description:
     "Sell your unfinished or under-construction property with stunning photorealistic renovation visuals from PrimeGhar. Help buyers see the finished vision before it exists.",
+  path: "/services/virtual-renovation",
   keywords: [
     "virtual renovation property",
     "under construction property visuals",
@@ -21,13 +22,9 @@ export const metadata: Metadata = {
     "photorealistic renovation renders",
     "pre-construction property marketing",
   ],
-  openGraph: {
-    title: "Virtual Renovation for Properties | PrimeGhar",
-    description:
-      "Turn an unfinished construction into a stunning completed property visual — sell the vision before the build is done.",
-    type: "website",
-  },
-};
+  ogDescription:
+    "Turn an unfinished construction into a stunning completed property visual — sell the vision before the build is done.",
+});
 
 const jsonLd = {
   "@context": "https://schema.org",

@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Palette, ScanEye, Zap, Banknote } from "lucide-react";
 import { cormorant } from "@/app/components/home/services-data";
+import { pageMetadata } from "@/app/lib/seo";
 import ScrollArrow from "./_components/ScrollArrow";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Virtual Staging & Furnishing for Properties | PrimeGhar",
   description:
     "Transform empty rooms into beautifully furnished spaces with PrimeGhar's virtual staging service. Photorealistic renders delivered in 48–72 hours — a fraction of physical staging costs.",
+  path: "/services/virtual-staging",
   keywords: [
     "virtual staging property",
     "virtual furnishing real estate",
@@ -15,13 +16,10 @@ export const metadata: Metadata = {
     "furnished property photos India",
     "virtual interior design for selling",
   ],
-  openGraph: {
-    title: "Virtual Staging & Furnishing | PrimeGhar",
-    description:
-      "Turn empty rooms into fully furnished homes — photorealistic virtual staging that helps buyers fall in love instantly.",
-    type: "website",
-  },
-};
+  ogTitle: "Virtual Staging & Furnishing | PrimeGhar",
+  ogDescription:
+    "Turn empty rooms into fully furnished homes — photorealistic virtual staging that helps buyers fall in love instantly.",
+});
 
 const jsonLd = {
   "@context": "https://schema.org",

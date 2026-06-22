@@ -101,7 +101,7 @@ const Header = () => {
   const navItems = [
     { id: "home", label: "HOME", path: "/" },
     { id: "about-us", label: "ABOUT US", path: "/about-us" },
-    { id: "services", label: "SERVICES", path: "/services", hasDropdown: true },
+    { id: "services", label: "SERVICES", hasDropdown: true },
   ];
 
   useEffect(() => {
@@ -247,7 +247,9 @@ const Header = () => {
             style={mounted ? { scale: textSize } : {}}
           >
             {navItems.map((item) => {
-              const isActive = pathname === item.path;
+              const isActive = item.hasDropdown
+                ? pathname.startsWith("/services")
+                : pathname === item.path;
 
               if (item.hasDropdown) {
                 return (

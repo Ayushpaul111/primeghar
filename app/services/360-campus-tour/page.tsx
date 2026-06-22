@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import {
   ArrowRight,
   GraduationCap,
@@ -13,12 +12,14 @@ import {
   Mail,
 } from "lucide-react";
 import { cormorant } from "@/app/components/home/services-data";
+import { pageMetadata } from "@/app/lib/seo";
 import ScrollArrow from "./_components/ScrollArrow";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Virtual Campus Tours for Schools & Colleges | PrimeGhar",
   description:
     "Let prospective students and parents explore your entire campus online with PrimeGhar's immersive 360° virtual campus tours — classrooms, labs, hostels, sports grounds and more. Win more admissions from anywhere.",
+  path: "/services/360-campus-tour",
   keywords: [
     "virtual campus tour",
     "360 college tour India",
@@ -27,13 +28,9 @@ export const metadata: Metadata = {
     "virtual open day",
     "google business profile campus tour",
   ],
-  openGraph: {
-    title: "Virtual Campus Tours for Schools & Colleges | PrimeGhar",
-    description:
-      "Immersive 360° campus tours that let students and parents explore your entire institution before they apply.",
-    type: "website",
-  },
-};
+  ogDescription:
+    "Immersive 360° campus tours that let students and parents explore your entire institution before they apply.",
+});
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -121,7 +118,7 @@ export default function CampusTourPage() {
       />
 
       {/* ── Hero: full-viewport 360° experience ──────────────── */}
-      <section className="relative h-screen min-h-[580px]">
+      <section className="relative h-dvh min-h-[580px]">
         {/* Live 360° tour fills the entire viewport — swap with a campus-specific tour when available */}
         <iframe
           src="https://www.klapty.com/tour/tunnel/PlF05v7VZn"

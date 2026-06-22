@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import {
   ArrowRight,
   MapPin,
@@ -11,12 +10,14 @@ import {
   Building2,
 } from "lucide-react";
 import { cormorant } from "@/app/components/home/services-data";
+import { pageMetadata } from "@/app/lib/seo";
 import ScrollArrow from "./_components/ScrollArrow";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "360° Virtual Tours for Hotels & Hospitality | PrimeGhar",
   description:
     "Show guests the real experience before they book. PrimeGhar creates immersive 360° virtual tours for hotels — perfect for weddings, banquets, suites and Google Maps. One shoot, every channel.",
+  path: "/services/360-hotels-tour",
   keywords: [
     "360 virtual tour hotels",
     "hotel virtual tour India",
@@ -25,13 +26,9 @@ export const metadata: Metadata = {
     "google business profile virtual tour",
     "hotel marketing virtual tour",
   ],
-  openGraph: {
-    title: "360° Virtual Tours for Hotels & Hospitality | PrimeGhar",
-    description:
-      "Immersive 360° tours that let guests explore your hotel, banquet halls and suites before they ever arrive.",
-    type: "website",
-  },
-};
+  ogDescription:
+    "Immersive 360° tours that let guests explore your hotel, banquet halls and suites before they ever arrive.",
+});
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -130,7 +127,7 @@ export default function HotelsTourPage() {
       />
 
       {/* ── Hero: full-viewport 360° experience ──────────────── */}
-      <section className="relative h-screen min-h-[580px]">
+      <section className="relative h-dvh min-h-[580px]">
         {/* Live 360° tour fills the entire viewport — swap with a hotel-specific tour when available */}
         <iframe
           src="https://www.klapty.com/tour/tunnel/PlF05v7VZn"
@@ -418,12 +415,12 @@ export default function HotelsTourPage() {
                     alt={`${label} 360 virtual tour example`}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <p className="text-white text-sm font-semibold tracking-wide leading-tight">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
+                    <p className="text-white text-xs sm:text-sm font-semibold tracking-wide leading-tight">
                       {label}
                     </p>
-                    <p className="text-white/60 text-[11px] mt-0.5 leading-tight">
+                    <p className="text-white/70 text-[11px] sm:text-xs mt-0.5 leading-tight">
                       {description}
                     </p>
                   </div>
